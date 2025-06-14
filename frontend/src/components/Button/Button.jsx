@@ -4,7 +4,6 @@ import * as RemixIcons from "@remixicon/react";
 const Button = ({
   size = "medium",
   variant = "primary",
-  state = "default",
   leftIcon,
   rightIcon,
   label,
@@ -30,49 +29,52 @@ const Button = ({
   // Variant classes
   const variantClasses = {
     primary: {
-      default: "bg-primary-shade1 text-white",
-      hover: "hover:bg-blue-600",
-      pressed: "active:bg-blue-700",
-      disabled: "bg-blue-300 text-white cursor-not-allowed",
+      default: "bg-primary-shade1 text-white rounded-[4px]",
+      hover: "hover:bg-primary-tint2 hover:text-white rounded-[4px]",
+      pressed: "active:bg-primary-shade4 focus:bg-primary-shade4 active:text-white focus:text-white rounded-[4px]",
+      disabled: "bg-primary-tint4 text-white cursor-not-allowed rounded-[4px]",
     },
     secondary: {
-      default: "bg-white text-blue-500 border border-blue-500",
-      hover: "hover:bg-blue-50",
-      pressed: "active:bg-blue-100",
-      disabled: "bg-white text-blue-300 border-blue-300 cursor-not-allowed",
+      default: "bg-white text-primary-shade1 border border-primary-shade1 rounded-[4px]",
+      hover: "hover:bg-white hover:text-primary-tint2 hover:border-primary-tint2 rounded-[4px]",
+      pressed: "active:bg-white active:text-primary-shade4 focus:bg-white focus:text-primary-shade4 active:border-primary-shade4 focus:border-primary-shade4 rounded-[4px]",
+      disabled: "bg-white text-primary-tint4 border-primary-tint4 cursor-not-allowed rounded-[4px]",
     },
     tertiary: {
-      default: "bg-white text-blue-500",
-      hover: "hover:bg-blue-50",
-      pressed: "active:bg-blue-100",
-      disabled: "text-blue-300 cursor-not-allowed",
+      default: "bg-white text-primary-shade1 rounded-[4px]",
+      hover: "hover:bg-white hover:text-primary-tint2 rounded-[4px]",
+      pressed: "active:bg-white active:text-primary-shade4 focus:bg-white focus:text-primary-shade4 rounded-[4px]",
+      disabled: "bg-white text-primary-tint4 cursor-not-allowed rounded-[4px]",
     },
     "round-primary": {
-      default: "bg-blue-500 text-white rounded-full",
-      hover: "hover:bg-blue-600",
-      pressed: "active:bg-blue-700",
-      disabled: "bg-blue-300 text-white cursor-not-allowed rounded-full",
+      default: "bg-primary-shade1 text-white rounded-full",
+      hover: "hover:bg-primary-tint2 hover:text-white rounded-full",
+      pressed: "active:bg-primary-shade4 focus:bg-primary-shade4 active:text-white focus:text-white rounded-full",
+      disabled: "bg-primary-tint4 text-white cursor-not-allowed rounded-full",
     },
     "round-secondary": {
-      default: "bg-white text-blue-500 border border-blue-500 rounded-full",
-      hover: "hover:bg-blue-50",
-      pressed: "active:bg-blue-100",
-      disabled: "bg-white text-blue-300 border-blue-300 cursor-not-allowed rounded-full",
+      default: "bg-white text-primary-shade1 border border-primary-shade1 rounded-full",
+      hover: "hover:bg-white hover:text-primary-tint2 hover:border-primary-tint2 rounded-full",
+      pressed: "active:bg-white active:text-primary-shade4 focus:bg-white focus:text-primary-shade4 active:border-primary-shade4 focus:border-primary-shade4 rounded-full",
+      disabled: "bg-white text-primary-tint4 border-primary-tint4 cursor-not-allowed rounded-full",
     },
     "round-tertiary": {
-      default: "bg-transparent text-blue-500 rounded-full",
-      hover: "hover:bg-blue-50",
-      pressed: "active:bg-blue-100",
-      disabled: "text-blue-300 cursor-not-allowed rounded-full",
+      default: "bg-white text-primary-shade1 rounded-full",
+      hover: "hover:bg-white hover:text-primary-tint2 rounded-full",
+      pressed: "active:bg-white active:text-primary-shade4 focus:bg-white focus:text-primary-shade4 rounded-full",
+      disabled: "bg-white text-primary-tint4 cursor-not-allowed rounded-full",
     },
   };
 
   // Get state classes
   const getStateClasses = () => {
     if (disabled) return variantClasses[variant].disabled;
-    if (state === "hover") return `${variantClasses[variant].default} ${variantClasses[variant].hover}`;
-    if (state === "pressed") return `${variantClasses[variant].default} ${variantClasses[variant].pressed}`;
-    return variantClasses[variant].default;
+    
+    return `
+      ${variantClasses[variant].default}
+      ${variantClasses[variant].hover}
+      ${variantClasses[variant].pressed}
+    `;
   };
 
   // Render icon
@@ -110,18 +112,19 @@ const Button = ({
       style={customShadow}
       className={`
         flex items-center justify-center
-        font-roboto font-medium /* Changed to Roboto medium/semi-bold */
+        font-roboto font-medium
         ${sizeClasses[size]}
         ${widthClasses[size]}
         ${getStateClasses()}
-        gap-[6px] md:gap-[8px]
+        gap-[10px] md:gap-[6px]
         transition-colors duration-200
         ${className}
         ${fullWidth ? "w-full" : ""}
+        focus:outline-none
       `}
       disabled={disabled}
-      onClick={onClick}
-      data-state={state}
+      onClick={disabled ? undefined : onClick}
+      aria-disabled={disabled}
     >
       {renderIcon(leftIcon, "left")}
       {label && <span className="font-medium">{label}</span>}

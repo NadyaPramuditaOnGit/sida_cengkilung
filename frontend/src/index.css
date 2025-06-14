@@ -21,13 +21,22 @@
   }
 }
 
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.2s ease-out forwards;
+  }
 
-
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
 
 
 @theme{
   --font-roboto: 'Roboto', sans-serif;
   --font-lato: 'Lato', sans-serif;
+
 
   /*Netural color*/
  --color-netural-black: #000000;
@@ -217,6 +226,10 @@
   --color-warning2-tint4: #FFD9B8;
   --color-warning2-tint5: #FFF3E8;
   
+}
+
+.btn-gradient-pressed {
+  background: linear-gradient(90deg, rgba(0,136,238,0.2) 0%, rgba(154,189,223,0.2) 100%);
 }
    
 
