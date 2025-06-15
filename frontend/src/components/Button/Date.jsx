@@ -20,11 +20,16 @@ const formatDateKey = (dateObj) => {
   return `${year}-${month}-${day}`;
 };
 
-const Calendar = ({ value, onChange, onActivityChange }) => {
+const Calendar = ({ 
+  value, 
+  onChange, 
+  selectedActivity, 
+  onActivityChange,
+  showActivitySelector = false 
+}) => {
   const initialDate = value ? new Date(value) : new Date(2025, 6, 1);
   const [currentDate, setCurrentDate] = useState(initialDate);
   const [selectedDate, setSelectedDate] = useState(value ? formatDateKey(initialDate) : null);
-  const [selectedActivity, setSelectedActivity] = useState("");
 
   useEffect(() => {
     if (value) {
@@ -59,22 +64,6 @@ const Calendar = ({ value, onChange, onActivityChange }) => {
     setSelectedDate(dateKey);
     if (onChange) {
       onChange(dateObj);
-    }
-    const activity = kegiatanMap[dateKey] || "";
-    setSelectedActivity(activity);
-    if (onActivityChange) {
-      onActivityChange(activity);
-    }
-  };
-
-  const handleActivityChange = (e) => {
-    const activity = e.target.value;
-    setSelectedActivity(activity);
-    if (onActivityChange) {
-      onActivityChange(activity);
-    }
-    if (selectedDate) {
-      kegiatanMap[selectedDate] = activity;
     }
   };
 
@@ -146,7 +135,7 @@ const Calendar = ({ value, onChange, onActivityChange }) => {
   };
 
   return (
-    <div className="inline-flex flex-col gap-4 font-roboto"> {/* Tambahkan font-roboto di sini */}
+    <div className="inline-flex flex-col gap-4 font-roboto">
       <div className="w-[498px] p-3 bg-white rounded-sm shadow-[0px_5px_5px_0px_rgba(0,0,0,0.25)] flex flex-col">
         {/* Header with navigation */}
         <div className="flex justify-between items-center mb-4">
@@ -154,7 +143,7 @@ const Calendar = ({ value, onChange, onActivityChange }) => {
             onClick={() => navigateMonth(-1)}
             className="h-10 w-10 flex justify-center items-center hover:bg-netural-snow-grey rounded"
           >
-            <RiArrowLeftSLine className="text-xl" /> {/* Remix Icon */}
+            <RiArrowLeftSLine className="text-xl" />
           </button>
 
           <div className="flex gap-2">
@@ -182,7 +171,7 @@ const Calendar = ({ value, onChange, onActivityChange }) => {
             onClick={() => navigateMonth(1)}
             className="h-10 w-10 flex justify-center items-center hover:bg-netural-snow-grey rounded"
           >
-            <RiArrowRightSLine className="text-xl" /> {/* Remix Icon */}
+            <RiArrowRightSLine className="text-xl" />
           </button>
         </div>
 
@@ -225,40 +214,42 @@ const Calendar = ({ value, onChange, onActivityChange }) => {
         </div>
       </div>
 
-      {/* Input controls */}
-      <div className="flex flex-col gap-3">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1 font-roboto">Tanggal:</label>
-          <input
-            type="date"
-            value={selectedDate || ""}
-            onChange={(e) => {
-              const date = new Date(e.target.value);
-              if (!isNaN(date.getTime())) {
-                handleDateSelect(e.target.value, date);
-                setCurrentDate(date);
-              }
-            }}
-            className="border border-gray-300 rounded px-3 py-2 w-full font-roboto"
-          />
-        </div>
+      {/* Conditional rendering of input controls */}
+      {showActivitySelector && (
+        <div className="flex flex-col gap-3">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 font-roboto">Tanggal:</label>
+            <input
+              type="date"
+              value={selectedDate || ""}
+              onChange={(e) => {
+                const date = new Date(e.target.value);
+                if (!isNaN(date.getTime())) {
+                  handleDateSelect(e.target.value, date);
+                  setCurrentDate(date);
+                }
+              }}
+              className="border border-gray-300 rounded px-3 py-2 w-full font-roboto"
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1 font-roboto">Jenis Kegiatan:</label>
-          <select
-            value={selectedActivity}
-            onChange={handleActivityChange}
-            className="border border-gray-300 rounded px-3 py-2 w-full font-roboto"
-          >
-            <option value="">Pilih Jenis Kegiatan</option>
-            {kegiatanOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 font-roboto">Jenis Kegiatan:</label>
+            <select
+              value={selectedActivity}
+              onChange={onActivityChange}
+              className="border border-gray-300 rounded px-3 py-2 w-full font-roboto"
+            >
+              <option value="">Pilih Jenis Kegiatan</option>
+              {kegiatanOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
