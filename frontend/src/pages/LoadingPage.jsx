@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logoDesa from "src/assets/LOGO DESA ADAT CENGKILUNG.png";
+import logoDesa from "../assets/LOGO DESA ADAT CENGKILUNG.png";
 
 const LoadingPage = () => {
   const [visible, setVisible] = useState(false);

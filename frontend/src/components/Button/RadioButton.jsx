@@ -74,7 +74,7 @@ const RadioButton = ({
         </div>
       </div>
       {showLabel && label && (
-        <span className="text-[18px] text-black font-medium select-none">{label}</span>
+        <span className="text-[18px] font-roboto text-black font-medium select-none">{label}</span>
       )}
     </label>
   );
