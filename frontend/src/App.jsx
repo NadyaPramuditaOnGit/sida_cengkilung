@@ -1,54 +1,85 @@
-// src/App.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import InputField from './components/InputField/InputField';
-import Button from './components/Button/Button';
-import { RiLoginBoxLine } from '@remixicon/react';
+import { RiUserLine, RiEyeLine, RiEyeOffLine } from '@remixicon/react';
 
 function App() {
-  // Tambahkan state untuk menyimpan nilai input
-  const [nama, setNama] = useState('');
-  const [password, setPassword] = useState('');
-
-  // Fungsi submit (sementara hanya console.log)
-  const handleLogin = () => {
-    console.log('Nama:', nama);
-    console.log('Password:', password);
-    // Tambahkan validasi atau API call di sini
-  };
+  const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('user@example.com');
+  const [password, setPassword] = React.useState('');
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [isUploading, setIsUploading] = React.useState(false);
+  const [file, setFile] = React.useState(null);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-sm bg-white p-6 rounded-xl shadow-md font-roboto">
-        <h2 className="text-xl font-semibold text-center mb-6">Login</h2>
+    <div className="p-4 space-y-4 max-w-md mx-auto">
+      {/* Username Input */}
+      <InputField
+        title="Username"
+        value={username}
+        onChange={setUsername}  // Directly pass setUsername as it receives the value
+        enabled={true}
+        customIcon={<RiUserLine size={20} />}
+        validationRules={{
+          required: true,
+          minLength: 3,
+          message: "Username must be at least 3 characters"
+        }}
+      />
 
-        <div className="mb-4">
-          <InputField
-            title="Nama Lengkap"
-            placeholder="Masukkan nama lengkap"
-            type="text"
-            value={nama}
-            onChange={setNama}
-          />
-        </div>
+      {/* Email Input (disabled) */}
+      <InputField
+        title="Email"
+        value={email}
+        onChange={setEmail}
+        enabled={false}
+      />
 
-        <div className="mb-4">
-          <InputField
-            title="Password"
-            placeholder="Masukkan password"
-            type="password"
-            value={password}
-            onChange={setPassword}
-          />
-        </div>
+      {/* Password Input with toggle */}
+      <InputField
+        title="Password"
+        type={showPassword ? "text" : "password"}
+        value={password}
+        onChange={setPassword}
+        iconEnabled={true}
+        customIcon={showPassword ? <RiEyeOffLine size={20} /> : <RiEyeLine size={20} />}
+        validationRules={{
+          required: true,
+          minLength: 8,
+          message: "Password must be at least 8 characters"
+        }}
+      />
 
-        <div className="mt-6">
-          <Button
-            size="small"
-            label="Login"
-            rightIcon='RiLoginBoxLine'
-            onClick={handleLogin}
-          />
-        </div>
+      {/* File Upload Input */}
+      <InputField
+        title="Upload File"
+        type="file"
+        enabled={!isUploading}
+        onChange={setFile}  // Receives File object directly
+      />
+
+      {/* Control Buttons */}
+      <div className="mt-8 space-x-4">
+        <button 
+          onClick={() => setShowPassword(!showPassword)}
+          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors"
+        >
+          {showPassword ? 'Hide Password' : 'Show Password'}
+        </button>
+        <button 
+          onClick={() => setIsUploading(!isUploading)}
+          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors"
+        >
+          {isUploading ? 'Cancel Upload' : 'Upload File'}
+        </button>
+      </div>
+
+      {/* Debug Output */}
+      <div className="mt-8 p-4 bg-gray-100 rounded">
+        <h3 className="font-bold mb-2">Current Values:</h3>
+        <p>Username: {username}</p>
+        <p>Email: {email}</p>
+        <p>Password: {password ? '••••••••' : 'empty'}</p>
+        <p>File: {file?.name || 'No file selected'}</p>
       </div>
     </div>
   );

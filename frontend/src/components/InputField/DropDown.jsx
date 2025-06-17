@@ -1,79 +1,154 @@
-// src/components/Dropdown.jsx
-import React, { useState, useRef, useEffect } from "react";
-import { ArrowDownSLine } from "@remixicon/react";
+import React, { useState } from 'react';
+import { RiArrowDownSLine, RiArrowUpSLine } from '@remixicon/react';
 
-const Dropdown = ({
-  label = "Pilih opsi",
+const SelectField = ({
+  title = "",
+  placeholder = "Select an option",
+  value = "",
+  onChange = () => {},
   options = [],
+  size = "large",
   disabled = false,
-  onSelect = () => {},
+  iconPosition = "right",
+  showIcon = true,
+  helpText = "",
+  showHelpText = false,
+  className = "",
+  name = "",
+  required = false,
+  customIcon = null, 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
-  const dropdownRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
-  const toggleDropdown = () => {
-    if (!disabled) setIsOpen(!isOpen);
+  const getStateClasses = () => {
+    const baseClasses = `bg-white rounded-sm transition-all duration-200 font-['Roboto'] shadow-[0px_5px_5px_rgba(0,0,0,0.25)]`;
+    
+    if (disabled) {
+      return `${baseClasses} border border-gray-300 opacity-60 cursor-not-allowed`;
+    }
+    
+    if (isFocused || isOpen) {
+      return `${baseClasses} bg-blue-50 bg-opacity-50 border border-blue-300`;
+    }
+    
+    if (isHovered) {
+      return `${baseClasses} bg-gray-100 bg-opacity-50 border border-gray-300`;
+    }
+    
+    return `${baseClasses} border border-gray-300`;
   };
 
-  const handleSelect = (option) => {
-    setSelected(option);
-    setIsOpen(false);
-    onSelect(option);
+  const getTitleColor = () => disabled ? "text-gray-500" : "text-gray-800";
+  const getPlaceholderColor = () => disabled ? "text-gray-400" : "text-gray-500";
+  const getIconColor = () => disabled ? "text-gray-400" : "text-gray-600";
+
+  const getSizeClasses = () => size === "large" ? "px-4 py-2 text-base" : "px-3 py-1.5 text-sm";
+  const getTitleSizeClass = () => size === "large" ? "text-base font-bold" : "text-sm font-bold";
+  const getHelpTextSizeClass = () => size === "large" ? "text-sm font-normal" : "text-xs font-normal";
+
+   const renderIcon = () => {
+    if (!showIcon || iconPosition === "none") return null;
+    
+    const iconClass = `flex items-center ${getIconColor()}`;
+    
+    return (
+      <div className={iconClass}>
+        {customIcon ? customIcon({ isOpen }) : (
+          isOpen ? <RiArrowUpSLine size={20} /> : <RiArrowDownSLine size={20} />
+        )}
+      </div>
+    );
   };
 
-  // Klik di luar dropdown untuk menutup
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const getSelectedLabel = () => {
+    const selectedOption = options.find(opt => opt.value === value);
+    return selectedOption ? selectedOption.label : placeholder;
+  };
+
+  const handleOptionClick = (optionValue) => {
+    if (!disabled) {
+      onChange(optionValue);
+      setIsOpen(false);
+      setIsFocused(false);
+    }
+  };
 
   return (
-    <div className="w-full max-w-xs relative font-roboto" ref={dropdownRef}>
-      {/* Trigger */}
-      <button
-        onClick={toggleDropdown}
-        disabled={disabled}
-        className={`w-full flex items-center justify-between px-4 py-2 rounded-lg border text-sm transition-all
-          ${disabled
-            ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-            : isOpen
-            ? "bg-blue-50 border-blue-500 text-blue-600 shadow-md"
-            : "bg-white border-gray-300 text-gray-800 hover:bg-gray-50 active:bg-gray-100"
-          }
-        `}
+    <div 
+      className={`w-full flex flex-col items-start gap-1 relative ${className}`}
+      onMouseEnter={() => !disabled && setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Title - only shown if provided */}
+      {title && (
+        <label htmlFor={name} className={`${getTitleColor()} ${getTitleSizeClass()} font-['Roboto']`}>
+          {title}
+          {required && <span className="text-red-500 ml-1">*</span>}
+        </label>
+      )}
+      
+      {/* Select Container */}
+      <div 
+        id={name}
+        className={`w-full ${getSizeClasses()} ${getStateClasses()} flex items-center justify-between ${
+          iconPosition === 'left' ? 'gap-3' : iconPosition === 'right' ? 'gap-3' : ''
+        } cursor-pointer`}
+        onClick={() => !disabled && setIsOpen(!isOpen)}
+        onFocus={() => !disabled && setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        tabIndex={disabled ? -1 : 0}
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-controls={`${name}-options`}
+        aria-haspopup="listbox"
+        aria-disabled={disabled}
       >
-        <span>{selected?.label || label}</span>
-        <ArrowDownSLine
-          className={`w-5 h-5 transform transition-transform duration-200 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-        />
-      </button>
-
-      {/* Dropdown Items */}
+        {/* Left Icon */}
+        {iconPosition === "left" && renderIcon()}
+        
+        {/* Selected value or placeholder */}
+        <div className={`w-full ${getPlaceholderColor()} ${
+          size === 'large' ? 'text-base' : 'text-sm'
+        } font-normal font-['Roboto'] truncate ${
+          value ? 'text-gray-800' : getPlaceholderColor()
+        }`}>
+          {getSelectedLabel()}
+        </div>
+        
+        {/* Right Icon */}
+        {iconPosition === "right" && renderIcon()}
+      </div>
+      
+      {/* Dropdown options */}
       {isOpen && !disabled && (
-        <ul
-          className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden animate-fade-in"
+        <div 
+          id={`${name}-options`}
+          className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-sm shadow-lg top-full max-h-60 overflow-auto"
         >
           {options.map((option) => (
-            <li
+            <div
               key={option.value}
-              onClick={() => handleSelect(option)}
-              className="px-4 py-2 text-sm cursor-pointer hover:bg-blue-50 active:bg-blue-100 transition-all"
+              className={`px-4 py-2 cursor-pointer hover:bg-gray-100 ${
+                value === option.value ? 'bg-blue-50 text-blue-600' : 'text-gray-800'
+              }`}
+              onClick={() => handleOptionClick(option.value)}
             >
               {option.label}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
+      )}
+      
+      {/* Help Text - only shown if provided and showHelpText is true */}
+      {showHelpText && helpText && (
+        <div className={`flex items-center gap-1 ${getHelpTextSizeClass()} text-gray-500`}>
+          <span className="font-['Roboto']">{helpText}</span>
+        </div>
       )}
     </div>
   );
 };
 
-export default Dropdown;
+export default SelectField;
