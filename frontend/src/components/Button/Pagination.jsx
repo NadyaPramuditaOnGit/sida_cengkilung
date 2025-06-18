@@ -1,3 +1,4 @@
+// src/components/Button/Pagination.jsx
 import React from 'react';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
@@ -9,6 +10,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <div className="flex items-center gap-2">
+      {/* Tombol Previous */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -16,15 +18,22 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       >
         &lt;
       </button>
+
+      {/* Tombol Halaman */}
       {pages.map((page) => (
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-3 py-1 rounded ${currentPage === page ? 'bg-primary-shade4 text-netural-white font-roboto font-semibold'  : 'bg-primary-shade1 text-netural-white'}`}
+          className={`px-3 py-1 rounded font-roboto font-semibold 
+            ${currentPage === page
+              ? 'bg-primary-shade4 text-netural-white'
+              : 'bg-primary-shade1 text-netural-white'}`}
         >
           {page}
         </button>
       ))}
+
+      {/* Tombol Next */}
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

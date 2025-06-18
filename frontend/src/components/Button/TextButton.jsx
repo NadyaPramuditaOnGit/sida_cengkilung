@@ -10,6 +10,7 @@ const TextButton = ({
   onClick,
   className = "",
   fullWidth = false,
+  textAlign = "center",
 }) => {
   const sizeClasses = {
     xs: "text-[14px] px-3 py-1.5",
@@ -25,6 +26,12 @@ const TextButton = ({
     md: 18,
     lg: 24,
     xl: 28,
+  };
+
+  const alignmentClasses = {
+    left: "justify-start text-left",
+    center: "justify-center text-center",
+    right: "justify-end text-right",
   };
 
   const renderIcon = (iconName, position) => {
@@ -48,24 +55,24 @@ const TextButton = ({
     <button
       className={`
         font-semibold
-        rounded-md 
-        inline-flex 
-        items-center 
-        justify-center 
-        ${fullWidth ? "w-full" : "w-auto"} 
+        ${fullWidth ? "w-full" : "w-fit"} 
+        inline-flex items-center
+        ${alignmentClasses[textAlign]}
         ${disabled ? "cursor-not-allowed" : ""}
         ${sizeClasses[size]}
         ${className}
         text-neutral-black bg-transparent
         hover:text-primary-shade1
         active:text-info-shade5
-        focus:text-primary-shade4
+        focus:text-primary2-shade2
         disabled:text-primary-tint4
-        active:bg-[linear-gradient(90deg,_rgba(0,136,238,0.2)_0%,_rgba(154,189,223,0.2)_100%)]
         hover:transition-colors hover:duration-200
+        touch-manipulation
+        select-none
       `}
       disabled={disabled}
       onClick={onClick}
+      onTouchStart={() => {}}
       aria-disabled={disabled}>
       {renderIcon(leftIcon, "left")}
       {label && <span className="font-semibold">{label}</span>}

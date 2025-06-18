@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import Toolbar from './Toolbar'
+import Toolbar from './ToolBar'
 import Button from './Button/Button'
 import { RiSaveLine, RiDeleteBinLine } from '@remixicon/react'
 

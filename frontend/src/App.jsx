@@ -1,8 +1,11 @@
 import React from 'react'
+import LoadingPage from './pages/LoadingPage'
 
 function App() {
   return (
-    <div>App</div>
+    <div>
+      <LoadingPage/>
+    </div>
   )
 }
 
