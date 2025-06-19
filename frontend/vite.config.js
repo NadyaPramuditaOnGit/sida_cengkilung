@@ -13,6 +13,11 @@ export default defineConfig({
     extend: {},
     },
     plugins: [],
+    publicDir: 'public',
+    build: {
+       assetsDir: 'assets',
+    emptyOutDir: true,
+    }
     })
   ],
 })

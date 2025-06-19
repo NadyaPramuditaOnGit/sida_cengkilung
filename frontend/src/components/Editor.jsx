@@ -38,7 +38,7 @@ export default function Editor({ initialContent = '', onSave }) {
   return (
     <div className="bg-white rounded-lg shadow flex flex-col">
       <div className="p-2 border-b">
-        <h2 className="font-semibold text-netural-charcol-grey">Editor</h2>
+        <h2 className="font-semibold text-netural-charcol-grey font-roboto">Editor</h2>
       </div>
       
       <Toolbar editor={editorRef.current} />
