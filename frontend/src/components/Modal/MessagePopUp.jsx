@@ -1,10 +1,11 @@
 import React from 'react';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
+import Button from '../Button/Button';
 
 const MessagePopup = ({ type = 'confirm', title, message, onClose, onConfirm }) => {
   return (
-    <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-primary-shade1/30 z-50 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-sm relative p-6 text-center">
         {type === 'confirm' && (
           <>
@@ -13,18 +14,18 @@ const MessagePopup = ({ type = 'confirm', title, message, onClose, onConfirm }) 
             </button>
             <p className="text-lg font-semibold mb-4">{title}</p>
             <div className="flex justify-center gap-4">
-              <button
+              <Button
                 onClick={onConfirm}
-                className="px-4 py-1 rounded-md bg-blue-600 text-white shadow hover:bg-blue-700"
-              >
-                Lanjutkan
-              </button>
-              <button
+                variant="primary"
+                size="small"
+                label="Lanjutkan"
+              />
+              <Button
                 onClick={onClose}
-                className="px-4 py-1 rounded-md border border-blue-600 text-blue-600 hover:bg-blue-100"
-              >
-                Batal
-              </button>
+                variant="secondary"
+                size="small"
+                label="Batal"
+              />
             </div>
           </>
         )}
@@ -34,12 +35,14 @@ const MessagePopup = ({ type = 'confirm', title, message, onClose, onConfirm }) 
             <FaCheckCircle className="text-green-500 text-5xl mx-auto mb-4" />
             <h3 className="font-bold text-xl text-green-700">Sukses!</h3>
             <p className="text-sm text-gray-600 mt-1">{message}</p>
-            <button
-              onClick={onClose}
-              className="mt-4 px-4 py-1 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700"
-            >
-              OK
-            </button>
+            <div className="flex justify-center mt-4">
+              <Button
+                onClick={onClose}
+                variant="primary"
+                size="small"
+                label="OK"
+              />
+            </div>
           </>
         )}
 
@@ -48,12 +51,14 @@ const MessagePopup = ({ type = 'confirm', title, message, onClose, onConfirm }) 
             <FaTimesCircle className="text-red-500 text-5xl mx-auto mb-4" />
             <h3 className="font-bold text-xl text-red-700">Gagal!</h3>
             <p className="text-sm text-gray-600 mt-1">{message}</p>
-            <button
-              onClick={onClose}
-              className="mt-4 px-4 py-1 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700"
-            >
-              OK
-            </button>
+            <div className="flex justify-center mt-4">
+              <Button
+                onClick={onClose}
+                variant="primary"
+                size="small"
+                label="OK"
+              />
+            </div>
           </>
         )}
       </div>

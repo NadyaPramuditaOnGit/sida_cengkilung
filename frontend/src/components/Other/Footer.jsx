@@ -47,7 +47,7 @@ const Footer = () => {
 
           <div className="flex items-center gap-3 mt-2">
             <span>Follow Us :</span>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/profile.php?id=100063787560134" target="_blank" rel="noopener noreferrer">
               <FaFacebook className="text-xl" />
             </a>
             <a href="https://www.youtube.com/@banjarcengkilung6768" target="_blank" rel="noopener noreferrer">

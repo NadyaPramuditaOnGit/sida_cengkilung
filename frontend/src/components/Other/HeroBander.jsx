@@ -25,7 +25,7 @@ const HeroBanner = () => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 2500);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [images.length]);
