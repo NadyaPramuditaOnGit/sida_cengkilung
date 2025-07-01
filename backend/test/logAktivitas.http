@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:3000/api/log-aktivitas
+@token = Bearer <GANTI_DENGAN_TOKEN_ADMIN>
+
+// ### GET semua log (admin only)
+GET {{baseUrl}}
+Authorization: {{token}}
+
+
+// ### GET log berdasarkan ID pengguna (boleh akses sendiri atau admin)
+GET {{baseUrl}}/1
+Authorization: {{token}}
+
+
+// ### POST log aktivitas baru (tanpa auth karena bisa dicatat saat login/logout)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id_pengguna": 1,
+  "aktivitas": "Login ke sistem"
+}

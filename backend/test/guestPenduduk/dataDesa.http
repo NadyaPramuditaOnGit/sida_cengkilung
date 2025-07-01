@@ -1,0 +1,82 @@
+@baseUrl = http://localhost:3000/api
+@token = Bearer <token_opsional_kalau_login>
+
+### GET Data Kependudukan
+GET {{baseUrl}}/data-desa?jenis=Kependudukan
+Authorization: {{token}}
+
+### GET Total Kependudukan
+GET {{baseUrl}}/data-desa/total?jenis=Kependudukan
+Authorization: {{token}}
+
+### GET Data Agama
+GET {{baseUrl}}/data-desa?jenis=Agama
+Authorization: {{token}}
+
+### GET Total Agama
+GET {{baseUrl}}/data-desa/total?jenis=Agama
+Authorization: {{token}}
+
+### GET Data Pekerjaan
+GET {{baseUrl}}/data-desa?jenis=Pekerjaan
+Authorization: {{token}}
+
+### GET Total Pekerjaan
+GET {{baseUrl}}/data-desa/total?jenis=Pekerjaan
+Authorization: {{token}}
+
+###  GET Data Pendidikan
+GET {{baseUrl}}/data-desa?jenis=Pendidikan
+Authorization: {{token}}
+
+###  GET Total Pendidikan
+GET {{baseUrl}}/data-desa/total?jenis=Pendidikan
+Authorization: {{token}}
+
+###  GET Data Usia
+GET {{baseUrl}}/data-desa?jenis=Usia
+Authorization: {{token}}
+
+###  GET Total Usia
+GET {{baseUrl}}/data-desa/total?jenis=Usia
+Authorization: {{token}}
+
+
+### GET Data Kependudukan
+GET {{baseUrl}}/data-desa?jenis=Kependudukan
+
+
+### GET Total Kependudukan
+GET {{baseUrl}}/data-desa/total?jenis=Kependudukan
+
+
+### GET Data Agama
+GET {{baseUrl}}/data-desa?jenis=Agama
+
+
+### GET Total Agama
+GET {{baseUrl}}/data-desa/total?jenis=Agama
+
+
+### GET Data Pekerjaan
+GET {{baseUrl}}/data-desa?jenis=Pekerjaan
+
+
+### GET Total Pekerjaan
+GET {{baseUrl}}/data-desa/total?jenis=Pekerjaan
+
+
+###  GET Data Pendidikan
+GET {{baseUrl}}/data-desa?jenis=Pendidikan
+
+
+###  GET Total Pendidikan
+GET {{baseUrl}}/data-desa/total?jenis=Pendidikan
+
+
+###  GET Data Usia
+GET {{baseUrl}}/data-desa?jenis=Usia
+
+
+###  GET Total Usia
+GET {{baseUrl}}/data-desa/total?jenis=Usia

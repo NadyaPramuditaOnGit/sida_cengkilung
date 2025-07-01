@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:3000/api/galeri
+
+###  SECTION VIDEO
+###  GET 5 Video Kegiatan Desa Terbaru
+GET {{baseUrl}}/video
+
+
+###  SECTION FOTO (SEMUA)
+###  GET Semua Foto (default page 1)
+GET {{baseUrl}}/foto
+
+###  GET Semua Foto (page 2)
+GET {{baseUrl}}/foto?page=2
+
+
+###  SECTION FOTO (KEAGAMAAN)
+###  GET Foto Kategori Keagamaan
+GET {{baseUrl}}/foto?kategori=Keagamaan
+
+
+###  SECTION FOTO (KESENIAN)
+###  GET Foto Kategori Kesenian
+GET {{baseUrl}}/foto?kategori=Kesenian
+
+
+###  SECTION FOTO (LAINNYA)
+###  GET Foto Kategori Lainnya (selain Keagamaan dan Kesenian)
+GET {{baseUrl}}/foto?kategori=Lainnya

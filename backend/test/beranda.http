@@ -1,0 +1,72 @@
+@baseUrl = http://localhost:3000/api/beranda
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsImlhdCI6MTc1MDkzOTgxMywiZXhwIjoxNzUxMDI2MjEzfQ.D83lasFY7pOZENdt8gHJZ6-neNALPU1DwS1K1Kqu1K4
+
+### GET semua konten beranda
+GET {{baseUrl}}
+Authorization: {{token}}
+
+### GET detail konten beranda by ID
+GET {{baseUrl}}/2
+Authorization: {{token}}
+
+### POST tambah konten beranda
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "bagian": "Hero Banner",
+  "judul": "Selamat Datang di Desa Cengkilung",
+  "konten": "Desa kami penuh dengan semangat gotong royong.",
+  "lokasi_gambar": "uploads/banner.jpg",
+  "url_video": null,
+  "teks_tombol": "Jelajahi",
+  "tautan_tombol": "/tentang-desa",
+  "urutan_tampil": 1,
+  "aktif": true
+}
+
+### PUT update konten beranda
+PUT {{baseUrl}}/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "bagian": "Hero Banner",
+  "judul": "Update: Selamat Datang",
+  "konten": "Desa Cengkilung yang asri dan bersahabat.",
+  "lokasi_gambar": "uploads/banner-update.jpg",
+  "url_video": null,
+  "teks_tombol": "Eksplor",
+  "tautan_tombol": "/tentang",
+  "urutan_tampil": 1,
+  "aktif": true
+}
+
+### DELETE konten beranda
+DELETE {{baseUrl}}/1
+Authorization: {{token}}
+
+### GET Statistik Beranda Admin (Bulan Ini)
+GET {{baseUrl}}/statistik
+Authorization: {{token}}
+
+### GET Berita & Pengumuman Terkini
+GET {{baseUrl}}/berita-terkini
+Authorization: {{token}}
+
+### GET Agenda Terkini Beranda Admin
+GET {{baseUrl}}/agenda-terkini
+Authorization: {{token}}
+
+### GET Galeri Terkini untuk Dashboard Admin
+GET {{baseUrl}}/galeri-terkini
+Authorization: {{token}}
+
+### GET Tabel Data Desa (Statistik)
+GET {{baseUrl}}/data-desa-statistik
+Authorization: {{token}}
+
+### 👤 GET Profil Pengguna Login
+GET http://localhost:3000/api/auth/me
+Authorization: {{token}}

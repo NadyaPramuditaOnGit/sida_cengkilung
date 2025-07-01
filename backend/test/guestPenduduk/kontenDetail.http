@@ -1,0 +1,5 @@
+@baseUrl = http://localhost:3000/api
+# @id_konten = 10  // Ganti dengan ID konten yang tersedia di database
+
+### 📰 GET Detail Konten Berita/Pengumuman (by ID)
+GET {{baseUrl}}/detail/10

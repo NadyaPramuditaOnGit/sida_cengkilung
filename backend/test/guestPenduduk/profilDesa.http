@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3000/api
+@token = Bearer <token_opsional_kalau_login>
+
+###  GET Gambaran Umum Desa (konten Sejarah Desa)
+GET {{baseUrl}}/profil/gambaran-umum
+Authorization: {{token}}
+
+###  GET Daftar Perangkat Desa (slider struktur)
+GET {{baseUrl}}/profil/perangkat-desa
+Authorization: {{token}}
+
+
+###  GET Gambaran Umum Desa (konten Sejarah Desa)
+GET {{baseUrl}}/profil/gambaran-umum
+
+###  GET Daftar Perangkat Desa (slider struktur)
+GET {{baseUrl}}/profil/perangkat-desa
