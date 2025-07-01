@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000/api
+
+###  GET Daftar Berita - Halaman 1
+GET {{baseUrl}}/berita?page=1
+
+###  GET Daftar Berita - Halaman 2
+GET {{baseUrl}}/berita?page=2
+
+###  GET Daftar Berita - Default Page (tanpa ?page=)
+GET {{baseUrl}}/berita
+
+###  GET Daftar Berita - Halaman Kosong (jika sudah tidak ada data)
+GET {{baseUrl}}/berita?page=999

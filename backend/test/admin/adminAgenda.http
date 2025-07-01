@@ -1,0 +1,43 @@
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsImlhdCI6MTc1MTEwNzUwMCwiZXhwIjoxNzUxMTkzOTAwfQ.C_FP3HoAdsqPspfCGMqgyT1fStma2gkkZzIPLJpoWDI
+
+
+### GET semua agenda bulan sekarang (default)
+GET http://localhost:3000/admin/agenda
+Authorization: {{token}}
+
+### GET tanggal-tanggal agenda
+GET http://localhost:3000/admin/agenda/kalender
+Authorization: {{token}}
+
+### GET agenda by ID
+GET http://localhost:3000/admin/agenda/2
+Authorization: {{token}}
+
+### POST tambah agenda
+POST http://localhost:3000/admin/agenda
+Authorization: {{token}}
+Content-Type: multipart/form-data
+
+
+gambar: @backend/test/thumb.png
+judul_kegiatan: Rapat Warga
+tanggal: 2025-07-01
+waktu: 10:00
+lokasi: Balai Desa
+deskripsi: Pertemuan warga membahas pembangunan
+jenis_kegiatan: Sosial
+id_konten: 6
+
+### PUT update agenda
+PUT http://localhost:3000/admin/agenda/1
+Authorization: {{token}}
+Content-Type: multipart/form-data
+
+judul_kegiatan: Rapat Baru
+tanggal: 2025-07-02
+lokasi: Aula Desa
+jenis_kegiatan: Adat
+
+### DELETE agenda
+DELETE http://localhost:3000/admin/agenda/1
+Authorization: {{token}}

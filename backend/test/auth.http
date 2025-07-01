@@ -1,0 +1,159 @@
+### 1. REGISTRASI - Penduduk
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "nik": "1111111111111111",
+  "nama_lengkap": "Ayu Warga",
+  "tanggal_lahir": "1990-01-01",
+  "email": "ayu.warga@desa.id",
+  "no_hp": "081234567891",
+  "nama_pengguna": "ayuwarga",
+  "kata_sandi": "Testing123!",
+  "id_peran": 3,
+  "foto_profil": "uploads/foto/ayuwarga.jpg",
+  "jabatan": "Warga Biasa",
+  "alamat": "Dusun I, RT 01 RW 01"
+}
+
+
+###
+
+### 1. REGISTRASI - Perangkat Desa
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "nik": "2222222222222222",
+  "nama_lengkap": "Budi Perangkat",
+  "tanggal_lahir": "1985-05-10",
+  "email": "budi.perangkat@desa.id",
+  "no_hp": "081298765432",
+  "nama_pengguna": "budiperangkat",
+  "kata_sandi": "Testing123!",
+  "id_peran": 2,
+  "foto_profil": "uploads/foto/budiperangkat.jpg",
+  "jabatan": "Sekretaris Desa",
+  "alamat": "Dusun II, RT 02 RW 01"
+}
+
+
+###
+
+### 1. REGISTRASI - Admin
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "nik": "3333333333333333",
+  "nama_lengkap": "Citra Admin",
+  "tanggal_lahir": "1980-07-15",
+  "email": "citra.admin@desa.id",
+  "no_hp": "081312345678",
+  "nama_pengguna": "citraadmin",
+  "kata_sandi": "Testing123!",
+  "id_peran": 1,
+  "foto_profil": "uploads/foto/citraadmin.jpg",
+  "jabatan": "Admin Website",
+  "alamat": "Kantor Desa, Jalan Utama"
+}
+
+
+###
+
+### 2. LOGIN - Ayu Warga
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "nik": "1111111111111111",
+  "kata_sandi": "Testing456789!"
+}
+
+###
+
+### 2. LOGIN - Budi Perangkat
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "nik": "2222222222222222",
+  "kata_sandi": "Testing456!"
+}
+
+###
+
+### 2. LOGIN - Citra Admin
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "nik": "3333333333333333",
+  "kata_sandi": "Testing123!"
+}
+
+###
+
+### 3. PILIH PERAN - Ayu Warga
+POST http://localhost:3000/api/auth/select-role
+Content-Type: application/json
+
+{
+  "id_pengguna": 1,
+  "id_peran": 3
+}
+
+###
+
+### 3. PILIH PERAN - Budi Perangkat
+POST http://localhost:3000/api/auth/select-role
+Content-Type: application/json
+
+{
+  "id_pengguna": 2,
+  "id_peran": 2
+}
+
+###
+
+### 3. PILIH PERAN - Citra Admin
+POST http://localhost:3000/api/auth/select-role
+Content-Type: application/json
+
+{
+  "id_pengguna": 3,
+  "id_peran": 1
+}
+
+### 4. UBAH PASSWORD MANUAL
+# Gantilah ID dan password sesuai user yang login
+
+POST http://localhost:3000/api/auth/change-password
+Content-Type: application/json
+
+{
+  "id_pengguna": 1,
+  "password_lama": "Testing123!",
+  "password_baru": "Testing456!"
+}
+
+### 5. KIRIM EMAIL RESET PASSWORD
+# Gantilah ID dan password sesuai user yang login
+
+POST http://localhost:3000/api/auth/request-change-password
+Content-Type: application/json
+
+{
+  "email": "ayuvirgiana10@gmail.com"
+}
+
+### 6. UBAH PASSWORD VIA EMAIL (dengan token dari link)
+# Masukkan token dari email yang diterima pengguna
+POST http://localhost:3000/api/auth/change-password-via-email
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9wZW5nZ3VuYSI6MSwiZW1haWwiOiJheXV2aXJnaWFuYTEwQGdtYWlsLmNvbSIsImlhdCI6MTc1MTM3ODA4NiwiZXhwIjoxNzUxMzc4OTg2fQ.qxk8h7kxNNIBoCvYxyvpBIFkczQ9B8I2cr8v0X_DDE8",
+  "password_lama": "Testing110297",
+  "password_baru": "Testing1102978"
+}

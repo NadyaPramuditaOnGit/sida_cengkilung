@@ -1,0 +1,72 @@
+@baseUrl = http://localhost:3000/api/galeri
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsImlhdCI6MTc1MDcwNjQ0NSwiZXhwIjoxNzUwNzkyODQ1fQ.QvA5FRtGX8RuJDe4etsr26GXMmjrmJH03PX5ijSNt04
+
+
+### ✅ GET semua GALERI
+GET {{baseUrl}}
+Authorization: {{token}}
+
+
+### ✅ TAMBAH GALERI - tanpa id_konten (standalone)
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "judul": "Kegiatan Gotong Royong",
+  "deskripsi": "Kegiatan bersih-bersih lingkungan oleh warga desa.",
+  "kategori": "Kegiatan",
+  "jenis_media": "Foto",
+  "lokasi_file": "uploads/gotong-royong.jpg",
+  "id_konten": null,
+  "tag": ["lingkungan", "bersih", "desa"],
+  "unggulan": true
+}
+
+
+### ✅ TAMBAH GALERI - dengan id_konten (hubungkan ke konten)
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "judul": "Foto Acara 17 Agustus",
+  "deskripsi": "Foto kegiatan lomba dan upacara di desa.",
+  "kategori": "Keagamaan",
+  "jenis_media": "Foto",
+  "lokasi_file": "uploads/17an.jpg",
+  "id_konten": 3,
+  "tag": ["lomba", "merdeka", "desa"],
+  "unggulan": false
+}
+
+
+### ✅ UPDATE GALERI
+PUT {{baseUrl}}/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "judul": "Update: Gotong Royong Desa",
+  "deskripsi": "Updated deskripsi kegiatan gotong royong minggu lalu.",
+  "kategori": "Kegiatan",
+  "jenis_media": "Foto",
+  "lokasi_file": "uploads/gotong-royong-update.jpg",
+  "id_konten": null,
+  "tag": ["update", "gotongroyong"],
+  "unggulan": false
+}
+
+
+### ❌ DELETE GALERI (ganti ID sesuai data)
+DELETE {{baseUrl}}/1
+Authorization: {{token}}
+
+
+### ✅ GET Galeri Default (Foto, halaman 1)
+GET http://localhost:3000/api/galeri?jenis_media=Foto&page=1&limit=5
+Authorization: Bearer {{token}}
+
+### ✅ GET Galeri Video + search
+GET http://localhost:3000/api/galeri?jenis_media=Video&search=perayaan&page=1&limit=5
+Authorization: Bearer {{token}}

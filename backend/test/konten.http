@@ -1,0 +1,99 @@
+### ========================
+### 🔐 LOGIN untuk dapatkan token
+### ========================
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "nik": "1234567890123456",
+  "kata_sandi": "password"
+}
+
+### ========================
+### SET Bearer Token Sekali di Atas
+### Ganti nilai @token setelah login
+### ========================
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsImlhdCI6MTc1MDk0Mzk5OSwiZXhwIjoxNzUxMDMwMzk5fQ.mre8TZa9McTjUiboDSeZrV41iSeRJqnPKZI4x9Hbcqw
+
+### ========================
+### 📁 KATEGORI KONTEN
+### ========================
+
+### ✅ GET semua kategori
+GET http://localhost:3000/api/konten/kategori
+Authorization: Bearer {{token}}
+
+### ✅ POST tambah kategori
+POST http://localhost:3000/api/konten/kategori
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nama_kategori": "Berita",
+  "jenis_kategori": "Berita"
+}
+
+### ✅ PUT update kategori
+PUT http://localhost:3000/api/konten/kategori/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nama_kategori": "Berita Update",
+  "jenis_kategori": "Berita",
+  "induk_id": null
+}
+
+### ✅ DELETE kategori
+DELETE http://localhost:3000/api/konten/kategori/3
+Authorization: Bearer {{token}}
+
+### ========================
+### 📰 KONTEN
+### ========================
+
+### ✅ GET semua konten (tanpa filter)
+GET http://localhost:3000/api/konten/konten/all
+Authorization: Bearer {{token}}
+
+### ✅ GET konten dengan kategori, search, pagination
+GET http://localhost:3000/api/konten/konten?kategori=Berita&search=lomba&page=1&limit=5
+Authorization: Bearer {{token}}
+
+
+### ✅ POST tambah konten
+POST http://localhost:3000/api/konten/konten
+Authorization: Bearer {{token}}
+
+--form
+judul=Lomba 17 Agustus
+deskripsi=Desa mengadakan lomba kemerdekaan
+kategori=Berita
+id_sub_kategori=2
+id_penulis=1
+status=Draft
+thumbnail=@./thumb.png
+
+
+### ✅ GET konten by ID
+GET http://localhost:3000/api/konten/konten/3
+Authorization: Bearer {{token}}
+
+
+### ✅ PUT update konten (ganti thumbnail)
+PUT http://localhost:3000/api/konten/konten/3
+Authorization: Bearer {{token}}
+
+--form
+judul=Lomba 17 Agustus Update
+deskripsi=Lomba sudah dilaksanakan dan sukses
+kategori=Berita
+id_sub_kategori=2
+id_penulis=1
+status=Published
+thumbnail=@./thumb-update.jpg
+
+
+### ✅ DELETE konten
+DELETE http://localhost:3000/api/konten/konten/1
+Authorization: Bearer {{token}}

@@ -1,0 +1,35 @@
+@baseUrl = http://localhost:3000/api
+
+# Token Penduduk (role: Penduduk / id_peran: 3)
+@tokenPenduduk = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRfcGVyYW4iOjMsIm5hbWEiOiJBeXUgV2FyZ2EiLCJwZXJhbiI6IlBlbmR1ZHVrIiwiaWF0IjoxNzUxMzg0NjYzLCJleHAiOjE3NTE0NzEwNjN9.9RpvBavKntRR02BgG-tLLiFYG78qN5BNmZBywImbwyI
+
+# Guest tanpa token (biarkan kosong)
+@tokenGuest =
+
+# Ganti ini dengan token admin jika ingin testing admin
+@tokenAdmin = Bearer <TOKEN_ADMIN>
+
+###  1. GET Header Info sebagai Guest
+GET {{baseUrl}}/header
+Authorization: {{tokenGuest}}
+
+###  2. GET Header Info sebagai Penduduk
+GET {{baseUrl}}/header
+Authorization: {{tokenPenduduk}}
+
+###  3. GET Header Info sebagai Admin
+GET {{baseUrl}}/header
+Authorization: {{tokenAdmin}}
+
+
+### 4. GET Beranda (Guest)
+GET {{baseUrl}}/beranda
+Authorization: {{tokenGuest}}
+
+### 5. GET Beranda (Penduduk)
+GET {{baseUrl}}/beranda
+Authorization: {{tokenPenduduk}}
+
+### 6. GET Beranda (Admin) → seharusnya tidak menampilkan section khusus penduduk
+GET {{baseUrl}}/beranda
+Authorization: {{tokenAdmin}}

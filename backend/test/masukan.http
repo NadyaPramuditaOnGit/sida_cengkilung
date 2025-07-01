@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:3000/api/masukan
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsImlhdCI6MTc1MDk1NTYwMCwiZXhwIjoxNzUxMDQyMDAwfQ.ljfUpS9xXpxhwrmf9CF-N8Frs1LxeCYQsSbNxWOvaoQ
+ß
+
+### Kirim masukan (tanpa login)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "nama": "Dewi",
+  "email": "dewi@example.com",
+  "no_hp": "08123456789",
+  "subjek": "Saran",
+  "pesan": "Mohon ditambahkan tempat sampah di dekat balai desa."
+}
+
+
+### GET semua masukan (admin)
+GET {{baseUrl}}
+Authorization: {{token}}
+
+
+### GET detail masukan by ID
+GET {{baseUrl}}/1
+Authorization: {{token}}
+
+
+### Tanggapi masukan (admin)
+PUT {{baseUrl}}/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "status": "Selesai",
+  "tanggapan": "Terima kasih atas masukannya, akan segera kami tindak lanjuti."
+}
+
+
+### Hapus masukan
+DELETE {{baseUrl}}/1
+Authorization: {{token}}

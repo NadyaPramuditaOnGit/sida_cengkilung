@@ -1,0 +1,25 @@
+@baseUrl = http://localhost:3000/api
+
+###  1. GET Header Info (Guest)
+GET {{baseUrl}}/header
+
+
+###  2. GET Header Info (Penduduk)
+# Ganti token sesuai login user penduduk
+@tokenPenduduk = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRfcGVyYW4iOjMsIm5hbWEiOiJBeXUgV2FyZ2EiLCJwZXJhbiI6IlBlbmR1ZHVrIiwiaWF0IjoxNzUxMzg0NjYzLCJleHAiOjE3NTE0NzEwNjN9.9RpvBavKntRR02BgG-tLLiFYG78qN5BNmZBywImbwyI
+GET {{baseUrl}}/header
+Authorization: {{tokenPenduduk}}
+
+
+###  3. GET Header Info (Admin)
+# Ganti token sesuai login admin
+@tokenAdmin = Bearer <TOKEN_ADMIN>
+GET {{baseUrl}}/header
+Authorization: {{tokenAdmin}}
+
+
+###  4. GET Header Info (Pengurus)
+# Ganti token sesuai login pengurus
+@tokenPengurus = Bearer <TOKEN_PENGURUS>
+GET {{baseUrl}}/header
+Authorization: {{tokenPengurus}}
