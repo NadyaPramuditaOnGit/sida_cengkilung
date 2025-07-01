@@ -83,7 +83,7 @@ const HeroBanner = () => {
             key={index}
             onClick={() => setCurrentImageIndex(index)}
             className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+              index === currentImageIndex ? 'bg-netural-white' : 'bg-netural-white/50'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

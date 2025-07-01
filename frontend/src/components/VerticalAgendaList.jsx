@@ -1,5 +1,5 @@
 import React from 'react';
-import AgendaCard from '../pages/ListAgenda';
+import AgendaCard from '../components/Other/AgendaCard';
 
 const VerticalAgendaList = ({ data }) => {
   return (

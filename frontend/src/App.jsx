@@ -1,15 +1,10 @@
 import React from 'react'
-import GNavbar from './components/Other/Navbar/GNavbar'
-import HeroBander from './components/Other/HeroBander'
-import Footer from './components/Other/Footer'
+import LisAgenda from './pages/ListAgenda'
 
 function App() {
   return (
     <div>
-      <GNavbar/>
-      <HeroBander/>
-      <Footer/>
-      
+      <LisAgenda/>
     </div>
   )
 }

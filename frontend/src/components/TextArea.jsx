@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 const EditableTextArea = ({ 
-  label: propLabel = "Deskripsi", // Label default di-set di sini (bisa di-override via prop)
+  label: propLabel = "Deskripsi",
   initialValue = "", 
    
 }) => {
   const [isEditingLabel, setIsEditingLabel] = useState(false);
-  const [label, setLabel] = useState(propLabel); // Menggunakan propLabel sebagai initial state
+  const [label, setLabel] = useState(propLabel);
   const [value, setValue] = useState(initialValue);
 
   const handleLabelChange = (e) => {

@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-// Lazy load untuk optimasi performa
+
 const Beranda = lazy(() => import('../pages/guest/Beranda'));
 const Sejarah = lazy(() => import('../pages/guest/Sejarah'));
 const Berita = lazy(() => import('../pages/guest/informasi/Berita'));
