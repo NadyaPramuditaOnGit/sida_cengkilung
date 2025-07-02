@@ -1,0 +1,99 @@
+### 1. Get Agenda List (default bulan & tahun, page 1)
+GET http://localhost:3000/adminDanPengurus/agenda?page=1&limit=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+### 2. Get Agenda List (filter Juli 2025, page 2)
+GET http://localhost:3000/adminDanPengurus/agenda?bulan=7&tahun=2025&page=2&limit=3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+### 3. Get Kalender Agenda (semua tanggal yang memiliki agenda)
+GET http://localhost:3000/adminDanPengurus/agenda/kalender
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+### 4. Get Detail Agenda by ID (misal ID = 1)
+GET http://localhost:3000/adminDanPengurus/agenda/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+### 5. Create Agenda (dengan upload gambar)
+POST http://localhost:3000/adminDanPengurus/agenda
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryTest123
+
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="judul_kegiatan"
+
+Musyawarah Desa
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="tanggal"
+
+2025-07-05
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="waktu"
+
+10:00:00
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="lokasi"
+
+Balai Banjar
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="deskripsi"
+
+Diskusi antara warga desa untuk membahas kegiatan pembangunan.
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="jenis_kegiatan"
+
+Sosial
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="id_konten"
+
+6
+------WebKitFormBoundaryTest123
+Content-Disposition: form-data; name="gambar"; filename="musdes.jpg"
+Content-Type: image/jpeg
+
+< ./uploads_mock/musdes.jpg
+------WebKitFormBoundaryTest123--
+
+### 6. Update Agenda by ID (update deskripsi dan ganti gambar)
+PUT http://localhost:3000/adminDanPengurus/agenda/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryTest456
+
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="judul_kegiatan"
+
+Musyawarah Desa Update
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="tanggal"
+
+2025-07-05
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="waktu"
+
+14:00:00
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="lokasi"
+
+Aula Desa
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="deskripsi"
+
+Update agenda: musyawarah dilanjutkan untuk persiapan hari raya.
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="jenis_kegiatan"
+
+Adat
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="id_konten"
+
+7
+------WebKitFormBoundaryTest456
+Content-Disposition: form-data; name="gambar"; filename="musdes_updated.webp"
+Content-Type: image/webp
+
+< ./uploads_mock/musdes_updated.webp
+------WebKitFormBoundaryTest456--
+
+### 7. Delete Agenda by ID
+DELETE http://localhost:3000/adminDanPengurus/agenda/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 01, 2025 at 04:13 PM
+-- Generation Time: Jul 02, 2025 at 12:01 PM
 -- Server version: 9.3.0
 -- PHP Version: 8.3.21
 
@@ -47,8 +47,11 @@ CREATE TABLE `agenda_desa` (
 --
 
 INSERT INTO `agenda_desa` (`id_agenda`, `judul_kegiatan`, `tanggal`, `waktu`, `lokasi`, `deskripsi`, `jenis_kegiatan`, `id_konten`, `dibuat_oleh`, `dibuat_pada`, `diperbarui_pada`, `gambar`) VALUES
-(1, 'Rapat Revisi Dana Desa', '2025-06-10', '13:00:00', 'Balai Warga RW 03', 'Revisi anggaran dan musyawarah tambahan', 'Adat', 7, 3, '2025-06-24 13:24:13', '2025-06-28 10:45:50', '/uploads/agenda/gambar-1751043823479-370301391.png'),
-(2, 'Rapat Warga', '2025-07-01', '10:00:00', 'Balai Desa', 'Pertemuan warga membahas pembangunan', 'Sosial', 6, 3, '2025-06-27 16:46:09', '2025-06-27 16:46:09', '/uploads/agenda/gambar-1751042769344-879123607.png');
+(1, 'Musyawarah Desa Update', '2025-07-05', '14:00:00', 'Aula Desa', 'Update agenda: musyawarah dilanjutkan untuk persiapan hari raya.', 'Adat', 7, 3, '2025-06-24 13:24:13', '2025-07-02 09:48:59', '/uploads/agenda/agenda_1751449739564.webp'),
+(2, 'Rapat Warga', '2025-07-01', '10:00:00', 'Balai Desa', 'Pertemuan warga membahas pembangunan', 'Sosial', 6, 3, '2025-06-27 16:46:09', '2025-06-27 16:46:09', '/uploads/agenda/gambar-1751042769344-879123607.png'),
+(4, 'Musyawarah Desa', '2025-07-05', '10:00:00', 'Balai Banjar', 'Diskusi antara warga desa untuk membahas kegiatan pembangunan.', 'Sosial', 6, 3, '2025-07-02 09:48:27', '2025-07-02 09:48:27', '/uploads/agenda/agenda_1751449707933.jpg'),
+(5, 'Musyawarah Desa', '2025-07-05', '10:00:00', 'Balai Banjar', 'Diskusi antara warga desa untuk membahas kegiatan pembangunan.', 'Sosial', 6, 3, '2025-07-02 11:08:03', '2025-07-02 11:08:03', '/uploads/agenda/agenda_1751454483412.jpg'),
+(6, 'Musyawarah Desa', '2025-07-05', '10:00:00', 'Balai Banjar', 'Diskusi antara warga desa untuk membahas kegiatan pembangunan.', 'Sosial', 6, 3, '2025-07-02 11:25:35', '2025-07-02 11:25:35', '/uploads/agenda/agenda_1751455535535.jpg');
 
 -- --------------------------------------------------------
 
@@ -101,10 +104,12 @@ CREATE TABLE `data_desa` (
 --
 
 INSERT INTO `data_desa` (`id_data`, `jenis_data`, `jumlah_laki`, `jumlah_perempuan`, `tahun`, `keterangan`, `diperbarui_oleh`, `diperbarui_pada`) VALUES
-(2, 'Agama', 300, 310, '2025', 'Data pemeluk agama tahun 2025.', 3, '2025-06-26 12:25:37'),
 (3, 'Pekerjaan', 200, 180, '2025', 'Data pekerjaan utama penduduk desa.', 3, '2025-06-26 12:25:39'),
-(4, 'Usia', 270, 250, '2025', 'Distribusi usia penduduk.', 3, '2025-06-26 12:25:41'),
-(5, 'Kependudukan', 300, 250, '2024', 'Data awal tahun 2024', 3, '2025-06-28 11:34:17');
+(4, 'Usia', 125, 135, '2024', 'Data warga asli (updated)', 3, '2025-07-02 09:55:22'),
+(5, 'Kependudukan', 300, 250, '2024', 'Data awal tahun 2024', 3, '2025-06-28 11:34:17'),
+(6, 'Kependudukan', 120, 130, '2024', 'Data warga asli', 3, '2025-07-02 09:55:09'),
+(7, 'Kependudukan', 80, 100, '2024', 'Data pendatang', 3, '2025-07-02 09:55:11'),
+(8, 'Kependudukan', 120, 130, '2024', 'Data warga asli', 3, '2025-07-02 10:29:49');
 
 -- --------------------------------------------------------
 
@@ -128,7 +133,7 @@ CREATE TABLE `dokumen_desa` (
 --
 
 INSERT INTO `dokumen_desa` (`id_dokumen`, `judul`, `tanggal_modifikasi`, `tanggal_dokumen`, `lokasi_file`, `kategori`, `diunggah_oleh`, `dibuat_pada`) VALUES
-(1, 'Perdes Kebersihan Lingkungan (Update)', '2025-06-24 13:38:08', '2025-06-02', 'uploads/dokumen/perdes-kebersihan-update.pdf', 'Regulasi', 3, '2025-06-24 13:38:08');
+(3, 'Contoh Dokumen Desa', '2025-07-02 10:55:52', '2024-07-02', '/uploads/dokumen/dokumen-1751453752697-791562281.pdf', 'Surat', 2, '2025-07-02 10:55:52');
 
 -- --------------------------------------------------------
 
@@ -159,8 +164,8 @@ CREATE TABLE `galeri_desa` (
 INSERT INTO `galeri_desa` (`id_galeri`, `judul`, `deskripsi`, `tanggal_upload`, `kategori`, `jenis_media`, `lokasi_file`, `id_konten`, `diunggah_oleh`, `tag`, `unggulan`, `dibuat_pada`, `diperbarui_pada`) VALUES
 (7, 'Upacara Adat', 'Galeri foto kegiatan upacara adat', '2025-06-27 16:00:00', 'Keagamaan', 'Foto', 'http://localhost:3000/uploads/galeri/1751178605108-26652808.png', NULL, 3, '[\"adat\", \"budaya\"]', 1, '2025-06-29 06:30:05', '2025-06-29 06:30:05'),
 (8, 'Upacara Adat', 'Galeri foto kegiatan upacara adat', '2025-06-27 16:00:00', 'Keagamaan', 'Foto', 'http://localhost:3000/uploads/galeri/1751178605111-711597011.png', NULL, 3, '[\"adat\", \"budaya\"]', 1, '2025-06-29 06:30:05', '2025-06-29 06:30:05'),
-(10, 'Upacara Adat', 'Foto kegiatan adat', '2025-06-28 16:00:00', 'Keagamaan', 'Foto', 'http://localhost:3000/uploads/galeri/1751179304446-398470601.png', 6, 3, '[\"adat\", \"budaya\"]', 1, '2025-06-29 06:41:44', '2025-06-29 06:41:44'),
-(11, 'Upacara Adat', 'Foto kegiatan adat', '2025-06-28 16:00:00', 'Keagamaan', 'Foto', 'http://localhost:3000/uploads/galeri/1751179513856-761072266.png', 6, 3, '[\"adat\", \"budaya\"]', 1, '2025-06-29 06:45:13', '2025-06-29 06:45:13');
+(12, 'Upacara Melasti', 'Prosesi sakral sebelum Nyepi.', '2025-06-30 16:00:00', 'Keagamaan', 'Foto', 'http://localhost:3000/uploads/galeri/1751448777496-667343587.png', 6, 3, '[\"melasti\", \"adat\"]', 1, '2025-07-02 09:32:57', '2025-07-02 09:32:57'),
+(13, 'Upacara Melasti', 'Prosesi sakral sebelum Nyepi.', '2025-06-30 16:00:00', 'Keagamaan', 'Foto', 'http://localhost:3000/uploads/galeri/1751448906782-944303888.png', 6, 3, '[\"melasti\", \"adat\"]', 1, '2025-07-02 09:35:06', '2025-07-02 09:35:06');
 
 -- --------------------------------------------------------
 
@@ -195,6 +200,7 @@ CREATE TABLE `konten` (
   `judul` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `deskripsi` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `konten` longtext COLLATE utf8mb4_unicode_ci,
   `tanggal_publish` datetime DEFAULT CURRENT_TIMESTAMP,
   `kategori` enum('Berita','Pengumuman','Sejarah') COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_sub_kategori` int DEFAULT NULL,
@@ -210,13 +216,14 @@ CREATE TABLE `konten` (
 -- Dumping data for table `konten`
 --
 
-INSERT INTO `konten` (`id_konten`, `judul`, `slug`, `deskripsi`, `tanggal_publish`, `kategori`, `id_sub_kategori`, `id_penulis`, `thumbnail`, `status`, `jumlah_dilihat`, `dibuat_pada`, `diperbarui_pada`) VALUES
-(6, 'Lomba 17 Agustus', 'lomba-17-agustus', 'Desa mengadakan lomba kemerdekaan', '2025-06-26 21:35:38', 'Sejarah', 2, 1, 'https://example.com/thumb.jpg', 'Draft', 0, '2025-06-26 13:35:38', '2025-06-29 08:41:16'),
-(7, 'Lomba 17 Agustus', 'lomba-17-agustus-1', 'Desa mengadakan lomba kemerdekaan', '2025-06-27 00:25:31', 'Berita', 2, 1, '/uploads/thumbnails/thumbnail-1750955131138-43227376.png', 'Draft', 0, '2025-06-26 16:25:31', '2025-06-26 16:25:31'),
-(8, 'Lomba 17 Agustus (2)', 'lomba-17-agustus-2', 'Desa mengadakan lomba kemerdekaan', '2025-06-27 00:32:30', 'Berita', 2, 1, '/uploads/thumbnails/thumbnail-1750955550191-60021595.png', 'Draft', 0, '2025-06-26 16:32:30', '2025-06-26 16:32:30'),
-(9, 'Judul Berita Update', 'judul-berita-update', 'Berita sudah diupdate isinya', '2025-06-28 00:00:00', 'Berita', NULL, 3, 'http://localhost:3000/uploads/thumbnails/1751175332403-391295489.png', 'Archived', 0, '2025-06-29 05:16:46', '2025-06-29 05:35:32'),
-(10, 'Judul Berita Tes', 'judul-berita-tes', 'Isi lengkap berita yang sangat informatif.', '2025-06-28 00:00:00', 'Berita', NULL, 3, 'http://localhost:3000/uploads/thumbnails/1751175322438-302776652.png', 'Published', 0, '2025-06-29 05:35:22', '2025-06-29 05:35:22'),
-(11, 'Sejarah Desa Adat Cengkilung', 'sejarah-desa-adat-cengkilung', 'Desa Adat Cengkilung didirikan pada abad ke-17 dan memiliki sejarah panjang test test test test test test test', '2025-06-29 10:00:00', 'Sejarah', NULL, 3, 'http://localhost:3000/uploads/thumbnails/1751175322438-302776652.png', 'Published', 0, '2025-06-29 08:46:45', '2025-06-29 08:53:19');
+INSERT INTO `konten` (`id_konten`, `judul`, `slug`, `deskripsi`, `konten`, `tanggal_publish`, `kategori`, `id_sub_kategori`, `id_penulis`, `thumbnail`, `status`, `jumlah_dilihat`, `dibuat_pada`, `diperbarui_pada`) VALUES
+(6, 'Lomba 17 Agustus', 'lomba-17-agustus', 'Desa mengadakan lomba kemerdekaan', NULL, '2025-06-26 21:35:38', 'Sejarah', 2, 1, 'https://example.com/thumb.jpg', 'Draft', 0, '2025-06-26 13:35:38', '2025-06-29 08:41:16'),
+(7, 'Lomba 17 Agustus', 'lomba-17-agustus-1', 'Desa mengadakan lomba kemerdekaan', NULL, '2025-06-27 00:25:31', 'Berita', 2, 1, '/uploads/thumbnails/thumbnail-1750955131138-43227376.png', 'Draft', 0, '2025-06-26 16:25:31', '2025-06-26 16:25:31'),
+(8, 'Lomba 17 Agustus (2)', 'lomba-17-agustus-2', 'Desa mengadakan lomba kemerdekaan', NULL, '2025-06-27 00:32:30', 'Berita', 2, 1, '/uploads/thumbnails/thumbnail-1750955550191-60021595.png', 'Draft', 0, '2025-06-26 16:32:30', '2025-06-26 16:32:30'),
+(9, 'Judul Berita Update', 'judul-berita-update', 'Berita sudah diupdate isinya', NULL, '2025-06-28 00:00:00', 'Berita', NULL, 3, 'http://localhost:3000/uploads/thumbnails/1751175332403-391295489.png', 'Archived', 0, '2025-06-29 05:16:46', '2025-06-29 05:35:32'),
+(10, 'Judul Berita Tes', 'judul-berita-tes', 'Isi lengkap berita yang sangat informatif.', NULL, '2025-06-28 00:00:00', 'Berita', NULL, 3, 'http://localhost:3000/uploads/thumbnails/1751175322438-302776652.png', 'Published', 0, '2025-06-29 05:35:22', '2025-06-29 05:35:22'),
+(11, 'Sejarah Desa Adat Cengkilung', 'sejarah-desa-adat-cengkilung', 'Desa Adat Cengkilung didirikan pada abad ke-17 dan memiliki sejarah panjang test test test test test test test', NULL, '2025-06-29 10:00:00', 'Sejarah', NULL, 3, 'http://localhost:3000/uploads/thumbnails/1751175322438-302776652.png', 'Published', 0, '2025-06-29 08:46:45', '2025-06-29 08:53:19'),
+(13, '[UPDATE] Sosialisasi dari Dinas Kebudayaan', 'update-sosialisasi-dari-dinas-kebudayaan', 'Deskripsi baru setelah update...', 'Isi konten update-nya panjang di sini...', '2025-07-02 00:00:00', 'Pengumuman', NULL, 3, 'http://localhost:3000/uploads/thumbnails/1751446861896-850366693.jpg', 'Published', 0, '2025-07-02 09:00:48', '2025-07-02 09:01:01');
 
 -- --------------------------------------------------------
 
@@ -253,7 +260,13 @@ INSERT INTO `log_aktivitas` (`id_log`, `id_pengguna`, `jenis_log`, `dibuat_pada`
 (15, 3, 'Login Pengguna', '2025-07-01 13:49:14'),
 (16, 1, 'Login Pengguna', '2025-07-01 14:26:42'),
 (17, 1, 'Login Pengguna', '2025-07-01 15:25:11'),
-(18, 1, 'Login Pengguna', '2025-07-01 15:44:23');
+(18, 1, 'Login Pengguna', '2025-07-01 15:44:23'),
+(19, 3, 'Login Pengguna', '2025-07-02 08:55:24'),
+(20, 2, 'Login Pengguna', '2025-07-02 10:38:17'),
+(21, 3, 'Login Pengguna', '2025-07-02 10:43:03'),
+(22, 2, 'Login Pengguna', '2025-07-02 11:21:34'),
+(23, 3, 'Login Pengguna', '2025-07-02 11:22:05'),
+(24, 1, 'Login Pengguna', '2025-07-02 11:47:55');
 
 -- --------------------------------------------------------
 
@@ -280,7 +293,8 @@ CREATE TABLE `masukan_warga` (
 --
 
 INSERT INTO `masukan_warga` (`id_masukan`, `nama`, `email`, `no_hp`, `subjek`, `pesan`, `status`, `tanggapan`, `alamat_ip`, `dibuat_pada`, `diperbarui_pada`) VALUES
-(1, 'Dewi', 'dewi@example.com', '08123456789', 'Saran', 'Mohon ditambahkan tempat sampah di dekat balai desa.', 'Selesai', 'Terima kasih atas masukannya, akan segera kami tindak lanjuti.', '::ffff:127.0.0.1', '2025-06-25 06:29:42', '2025-06-25 06:30:01');
+(1, 'Dewi', 'dewi@example.com', '08123456789', 'Saran', 'Mohon ditambahkan tempat sampah di dekat balai desa.', 'Selesai', 'Terima kasih atas masukannya, akan segera kami tindak lanjuti.', '::ffff:127.0.0.1', '2025-06-25 06:29:42', '2025-06-25 06:30:01'),
+(2, 'Dewi', 'dewi@example.com', '08123456789', 'Saran', 'Mohon ditambahkan tempat sampah di dekat balai desa.', 'Baru', NULL, '::ffff:127.0.0.1', '2025-07-02 11:06:02', '2025-07-02 11:06:02');
 
 -- --------------------------------------------------------
 
@@ -311,9 +325,9 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nik`, `nama_lengkap`, `tanggal_lahir`, `email`, `no_hp`, `nama_pengguna`, `kata_sandi`, `status`, `foto_profil`, `jabatan`, `alamat`, `login_terakhir`, `dibuat_pada`, `diperbarui_pada`) VALUES
-(1, '1111111111111111', 'Ayu Warga', '1990-01-01', 'ayuvirgiana10@gmail.com', '081234567891', 'ayuwarga', '$2b$10$aUltCoRGvzVyJHWGPKTTS.jXzSzfcPui4v44h1f.ykb60rBOTOuWu', 'Aktif', 'uploads/foto/ayuwarga.jpg', 'Warga Biasa', 'Dusun I, RT 01 RW 01', '2025-07-01 15:44:23', '2025-06-21 17:48:00', '2025-07-01 15:44:23'),
-(2, '2222222222222222', 'Budi Perangkat', '1985-05-10', 'budi.perangkat@desa.id', '081298765432', 'budiperangkat', '$2b$10$ptKHje9GnKdo105z6fic5eneibSs6Z9AHS9a5yZLwVM6Ee.FgkvT2', 'Aktif', 'uploads/foto/budiperangkat.jpg', 'Sekretaris Desa', 'Dusun II, RT 02 RW 01', '2025-07-01 13:49:11', '2025-06-21 17:48:06', '2025-07-01 13:49:11'),
-(3, '3333333333333333', 'Citra Admin', '1980-07-15', 'citra.admin@desa.id', '081312345678', 'citraadmin', '$2b$10$uiu1AlwJTkJIIiX945nPye5wZgWWmvj7F572bq2R.WBo/dFMv/zKS', 'Aktif', 'uploads/foto/citraadmin.jpg', 'Admin Website', 'Kantor Desa, Jalan Utama', '2025-07-01 13:49:14', '2025-06-21 17:48:10', '2025-07-01 13:49:14'),
+(1, '1111111111111111', 'Ayu Warga', '1990-01-01', 'ayuvirgiana10@gmail.com', '081234567891', 'ayuwarga', '$2b$10$aUltCoRGvzVyJHWGPKTTS.jXzSzfcPui4v44h1f.ykb60rBOTOuWu', 'Aktif', 'uploads/foto/ayuwarga.jpg', 'Warga Biasa', 'Dusun I, RT 01 RW 01', '2025-07-02 11:47:55', '2025-06-21 17:48:00', '2025-07-02 11:47:55'),
+(2, '2222222222222222', 'Budi Perangkat', '1985-05-10', 'budi.perangkat@desa.id', '081298765432', 'budiperangkat', '$2b$10$ptKHje9GnKdo105z6fic5eneibSs6Z9AHS9a5yZLwVM6Ee.FgkvT2', 'Aktif', 'uploads/foto/budiperangkat.jpg', 'Sekretaris Desa', 'Dusun II, RT 02 RW 01', '2025-07-02 11:21:34', '2025-06-21 17:48:06', '2025-07-02 11:21:34'),
+(3, '3333333333333333', 'Citra Admin', '1980-07-15', 'citra.admin@desa.id', '081312345678', 'citraadmin', '$2b$10$uiu1AlwJTkJIIiX945nPye5wZgWWmvj7F572bq2R.WBo/dFMv/zKS', 'Aktif', 'uploads/foto/citraadmin.jpg', 'Admin Website', 'Kantor Desa, Jalan Utama', '2025-07-02 11:22:05', '2025-06-21 17:48:10', '2025-07-02 11:22:05'),
 (4, '1234567890123456', 'Test User Update', '1990-01-01', 'testuserupdate@example.com', '081234567891', 'testuserupdate', '$2b$10$8.OGDml1Pk4dkqZmS1MZVeI35oHqs5xw0zFgP60JCI3NSPhADDE1e', 'Non-Aktif', NULL, 'Staff Updated', 'Jl. Contoh No 2', NULL, '2025-06-28 16:11:53', '2025-06-28 16:12:48'),
 (5, '4444444444444444', 'User Update Foto', '1991-02-01', 'userupdate@example.com', '081234567893', 'userupload', '$2b$10$C6/kxRSyK2vyvz81rhp6ceFxhJrcTe87nq5EH4C.zpsBprDw3YXBG', 'Non-Aktif', '1751128788314-262599527.png', 'Updater', 'Jl. Baru Upload Foto', NULL, '2025-06-28 16:38:46', '2025-06-28 16:39:48');
 
@@ -400,7 +414,7 @@ CREATE TABLE `profil_desa` (
 --
 
 INSERT INTO `profil_desa` (`id_profil`, `bagian`, `judul`, `konten`, `lokasi_gambar`, `urutan_tampil`, `dibuat_pada`, `diperbarui_pada`) VALUES
-(1, 'Sejarah', 'Sejarah Desa Cengkilung (Final)', 'Desa ini berdiri sejak abad ke-18, diperbarui Juni 2025.', 'uploads/profil/sejarah-update.jpg', 1, '2025-06-26 16:34:59', '2025-06-28 12:53:42'),
+(1, 'Sejarah', 'https://www.youtube.com/watch?v=dummy-url', 'Ini adalah deskripsi baru tentang sejarah desa.', 'uploads/profil/sejarah-update.jpg', 1, '2025-06-26 16:34:59', '2025-07-02 11:04:19'),
 (2, 'PerangkatDesa', 'Budi Santoso', 'Kepala Desa', '/uploads/profil/kades.jpg', 1, '2025-06-28 12:57:00', '2025-06-28 12:57:00'),
 (3, 'PerangkatDesa', 'Siti Aminah', 'Sekretaris Desa', '/uploads/profil/sekretaris.jpg', 2, '2025-06-28 12:57:00', '2025-06-28 12:57:00');
 
@@ -517,7 +531,7 @@ ALTER TABLE `profil_desa`
 -- AUTO_INCREMENT for table `agenda_desa`
 --
 ALTER TABLE `agenda_desa`
-  MODIFY `id_agenda` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_agenda` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `beranda`
@@ -529,19 +543,19 @@ ALTER TABLE `beranda`
 -- AUTO_INCREMENT for table `data_desa`
 --
 ALTER TABLE `data_desa`
-  MODIFY `id_data` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_data` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `dokumen_desa`
 --
 ALTER TABLE `dokumen_desa`
-  MODIFY `id_dokumen` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_dokumen` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `galeri_desa`
 --
 ALTER TABLE `galeri_desa`
-  MODIFY `id_galeri` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_galeri` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `kategori_konten`
@@ -553,19 +567,19 @@ ALTER TABLE `kategori_konten`
 -- AUTO_INCREMENT for table `konten`
 --
 ALTER TABLE `konten`
-  MODIFY `id_konten` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_konten` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_log` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `masukan_warga`
 --
 ALTER TABLE `masukan_warga`
-  MODIFY `id_masukan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_masukan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pengguna`

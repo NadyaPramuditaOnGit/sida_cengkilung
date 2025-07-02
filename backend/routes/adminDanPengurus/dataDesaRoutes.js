@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const dataDesaController = require('../../controllers/adminDanPengurus/dataDesaController');
-const { verifyTokenRequired } = require('../../middleware/authMiddleware');
-const { verifyAdmin } = require('../../middleware/peranMiddleware');
+const { verifyTokenRequired, authorizeRoles } = require('../../middleware/authMiddleware');
 
-// Semua route dilindungi untuk Admin
-router.get('/', verifyTokenRequired, verifyAdmin, dataDesaController.getDataDesaByJenis);
-router.post('/', verifyTokenRequired, verifyAdmin, dataDesaController.createDataDesa);
-router.put('/:id', verifyTokenRequired, verifyAdmin, dataDesaController.updateDataDesa);
-router.delete('/:id', verifyTokenRequired, verifyAdmin, dataDesaController.deleteDataDesa);
+// Admin (1) dan Pengurus (2)
+router.get('/', verifyTokenRequired, authorizeRoles(1, 2), dataDesaController.getDataDesaByJenis);
+router.post('/', verifyTokenRequired, authorizeRoles(1, 2), dataDesaController.createDataDesa);
+router.put('/:id', verifyTokenRequired, authorizeRoles(1, 2), dataDesaController.updateDataDesa);
+router.delete('/:id', verifyTokenRequired, authorizeRoles(1, 2), dataDesaController.deleteDataDesa);
 
 module.exports = router;

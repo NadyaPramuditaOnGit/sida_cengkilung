@@ -1,0 +1,145 @@
+### 1. Ambil Semua Pengguna (dengan pagination)
+GET http://localhost:3000/admin/pengguna?page=1&limit=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NTUzMjUsImV4cCI6MTc1MTU0MTcyNX0.uYAOsyKiE8IrOEy9u46bzf8DTzuWIubbHiaPDOHniGo
+
+###
+
+### 2. Ambil Detail Pengguna by ID
+GET http://localhost:3000/admin/pengguna/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NTUzMjUsImV4cCI6MTc1MTU0MTcyNX0.uYAOsyKiE8IrOEy9u46bzf8DTzuWIubbHiaPDOHniGo
+
+###
+
+### 3. Tambah Pengguna Baru
+POST http://localhost:3000/admin/pengguna/tambah
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NTUzMjUsImV4cCI6MTc1MTU0MTcyNX0.uYAOsyKiE8IrOEy9u46bzf8DTzuWIubbHiaPDOHniGo
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="nik"
+
+1234567890123456
+--boundary
+Content-Disposition: form-data; name="namaLengkap"
+
+I Made Contoh
+--boundary
+Content-Disposition: form-data; name="tanggalLahir"
+
+1995-01-01
+--boundary
+Content-Disposition: form-data; name="email"
+
+contoh@cengkilung.desa
+--boundary
+Content-Disposition: form-data; name="noHp"
+
+08123456789
+--boundary
+Content-Disposition: form-data; name="namaPengguna"
+
+made_admin
+--boundary
+Content-Disposition: form-data; name="kataSandi"
+
+contoh123
+--boundary
+Content-Disposition: form-data; name="ulangKataSandi"
+
+contoh123
+--boundary
+Content-Disposition: form-data; name="status"
+
+Aktif
+--boundary
+Content-Disposition: form-data; name="jabatan"
+
+Admin Desa
+--boundary
+Content-Disposition: form-data; name="alamat"
+
+Banjar Cengkilung, Kuta Utara
+--boundary
+Content-Disposition: form-data; name="idPeran"
+
+1
+--boundary
+Content-Disposition: form-data; name="foto_profil"; filename="foto.jpg"
+Content-Type: image/jpeg
+
+< ./contoh-foto.jpg
+--boundary--
+
+###
+
+### 4. Edit Pengguna (ganti data dan/atau foto)
+PUT http://localhost:3000/admin/pengguna/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NTUzMjUsImV4cCI6MTc1MTU0MTcyNX0.uYAOsyKiE8IrOEy9u46bzf8DTzuWIubbHiaPDOHniGo
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="nik"
+
+1234567890123456
+--boundary
+Content-Disposition: form-data; name="namaLengkap"
+
+I Made Update
+--boundary
+Content-Disposition: form-data; name="tanggalLahir"
+
+1990-01-01
+--boundary
+Content-Disposition: form-data; name="email"
+
+update@cengkilung.desa
+--boundary
+Content-Disposition: form-data; name="noHp"
+
+08987654321
+--boundary
+Content-Disposition: form-data; name="namaPengguna"
+
+made_update
+--boundary
+Content-Disposition: form-data; name="kataSandi"
+
+update123
+--boundary
+Content-Disposition: form-data; name="ulangKataSandi"
+
+update123
+--boundary
+Content-Disposition: form-data; name="status"
+
+Non-Aktif
+--boundary
+Content-Disposition: form-data; name="jabatan"
+
+Sekretaris
+--boundary
+Content-Disposition: form-data; name="alamat"
+
+Banjar Anyar
+--boundary
+Content-Disposition: form-data; name="idPeran"
+
+2
+--boundary
+Content-Disposition: form-data; name="foto_profil"; filename="update.jpg"
+Content-Type: image/jpeg
+
+< ./update-foto.jpg
+--boundary--
+
+###
+
+### 5. Hapus Pengguna by ID
+DELETE http://localhost:3000/admin/pengguna/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NTUzMjUsImV4cCI6MTc1MTU0MTcyNX0.uYAOsyKiE8IrOEy9u46bzf8DTzuWIubbHiaPDOHniGo
+
+###
+
+### 6. (Opsional) Ambil Semua Role untuk Dropdown Role
+GET http://localhost:3000/admin/peran
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NTUzMjUsImV4cCI6MTc1MTU0MTcyNX0.uYAOsyKiE8IrOEy9u46bzf8DTzuWIubbHiaPDOHniGo

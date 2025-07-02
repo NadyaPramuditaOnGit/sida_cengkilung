@@ -1,11 +1,12 @@
 const db = require('../../config/db');
 
+// Bagian-bagian valid untuk konten statis beranda
 const bagianValid = [
   'Hero Banner', 'Berita Terkini', 'Video Kegiatan',
   'Sejarah Singkat', 'Statistik Desa'
 ];
 
-// ==================== CRUD KONTEN BERANDA ====================
+// ==================== CRUD KONTEN BERANDA (Konten Statis) ====================
 
 // GET semua konten beranda
 exports.getAllBeranda = async (req, res) => {
@@ -39,6 +40,7 @@ exports.createBeranda = async (req, res) => {
     urutan_tampil, aktif
   } = req.body;
 
+  // Validasi input
   if (!bagian) return res.status(400).json({ error: 'Bagian beranda wajib diisi.' });
   if (!bagianValid.includes(bagian)) return res.status(400).json({ error: 'Bagian tidak valid.' });
   if (url_video && !/^https?:\/\/.+/.test(url_video)) return res.status(400).json({ error: 'URL video tidak valid.' });
@@ -73,6 +75,7 @@ exports.updateBeranda = async (req, res) => {
     urutan_tampil, aktif
   } = req.body;
 
+  // Validasi input
   if (!bagianValid.includes(bagian)) return res.status(400).json({ error: 'Bagian tidak valid.' });
   if (url_video && !/^https?:\/\/.+/.test(url_video)) return res.status(400).json({ error: 'URL video tidak valid.' });
   if (urutan_tampil !== undefined && isNaN(urutan_tampil)) return res.status(400).json({ error: 'Urutan tampil harus berupa angka.' });
@@ -117,10 +120,9 @@ exports.deleteBeranda = async (req, res) => {
   }
 };
 
+// ==================== DATA UNTUK HALAMAN DASHBOARD PENGURUS ====================
 
-// ==================== DATA UNTUK HALAMAN BERANDA PENGURUS ====================
-
-// === Statistik Ringkasan
+// Statistik ringkasan dashboard
 exports.getStatistikBulanIni = async (req, res) => {
   try {
     const [berita] = await db.execute(`
@@ -163,7 +165,7 @@ exports.getStatistikBulanIni = async (req, res) => {
   }
 };
 
-// === Berita & Pengumuman Terkini
+// Berita & pengumuman terbaru (limit 5)
 exports.getBeritaPengumumanTerkini = async (req, res) => {
   try {
     const [rows] = await db.execute(`
@@ -183,7 +185,7 @@ exports.getBeritaPengumumanTerkini = async (req, res) => {
   }
 };
 
-// === Agenda Terkini
+// Agenda desa mendatang (limit 3)
 exports.getAgendaTerkini = async (req, res) => {
   try {
     const [rows] = await db.execute(`
@@ -201,7 +203,7 @@ exports.getAgendaTerkini = async (req, res) => {
   }
 };
 
-// === Galeri Foto Terkini
+// Galeri foto terbaru (limit 10)
 exports.getGaleriTerkini = async (req, res) => {
   try {
     const [rows] = await db.execute(`
@@ -220,7 +222,7 @@ exports.getGaleriTerkini = async (req, res) => {
   }
 };
 
-// === Data Statistik Desa (Jumlah Laki-Laki / Perempuan / Total)
+// Data statistik desa tahun berjalan
 exports.getDataDesaStatistik = async (req, res) => {
   try {
     const [rows] = await db.execute(`
@@ -241,38 +243,32 @@ exports.getDataDesaStatistik = async (req, res) => {
   }
 };
 
+// === Endpoint utama untuk frontend dashboard pengurus ===
 exports.getBeranda = async (req, res) => {
   try {
-    // Statistik Ringkasan
+    // Statistik ringkasan
     const [berita] = await db.execute(`
-      SELECT COUNT(*) AS total 
-      FROM konten 
+      SELECT COUNT(*) AS total FROM konten 
       WHERE MONTH(diperbarui_pada) = MONTH(CURRENT_DATE())
         AND YEAR(diperbarui_pada) = YEAR(CURRENT_DATE())
     `);
-
     const [galeri] = await db.execute(`
-      SELECT COUNT(*) AS total 
-      FROM galeri_desa 
+      SELECT COUNT(*) AS total FROM galeri_desa 
       WHERE MONTH(tanggal_upload) = MONTH(CURRENT_DATE())
         AND YEAR(tanggal_upload) = YEAR(CURRENT_DATE())
     `);
-
     const [login] = await db.execute(`
-      SELECT COUNT(*) AS total 
-      FROM log_aktivitas 
+      SELECT COUNT(*) AS total FROM log_aktivitas 
       WHERE jenis_log = 'Login Pengguna'
         AND MONTH(dibuat_pada) = MONTH(CURRENT_DATE())
         AND YEAR(dibuat_pada) = YEAR(CURRENT_DATE())
     `);
-
     const [agenda] = await db.execute(`
-      SELECT COUNT(*) AS total 
-      FROM agenda_desa 
+      SELECT COUNT(*) AS total FROM agenda_desa 
       WHERE tanggal >= CURDATE()
     `);
 
-    // Berita & Pengumuman Terkini (limit 5)
+    // Berita & pengumuman terbaru
     const [beritaTerkini] = await db.execute(`
       SELECT 
         k.id_konten, k.judul, k.thumbnail,
@@ -284,28 +280,26 @@ exports.getBeranda = async (req, res) => {
       LIMIT 5
     `);
 
-    // Agenda Terkini (limit 3)
+    // Agenda mendatang
     const [agendaTerkini] = await db.execute(`
-      SELECT 
-        id_agenda, judul_kegiatan, tanggal, lokasi
+      SELECT id_agenda, judul_kegiatan, tanggal, lokasi
       FROM agenda_desa
       WHERE tanggal >= CURDATE()
       ORDER BY tanggal ASC, waktu ASC
       LIMIT 3
     `);
 
-    // Galeri Foto Terkini (limit 10)
+    // Galeri terbaru
     const [galeriTerkini] = await db.execute(`
-      SELECT 
-        id_galeri, judul, deskripsi, lokasi_file, jenis_media, 
-        DATE_FORMAT(dibuat_pada, '%Y-%m-%d') AS tanggal
+      SELECT id_galeri, judul, deskripsi, lokasi_file, jenis_media, 
+             DATE_FORMAT(dibuat_pada, '%Y-%m-%d') AS tanggal
       FROM galeri_desa
       WHERE jenis_media = 'Foto'
       ORDER BY dibuat_pada DESC
       LIMIT 10
     `);
 
-    // Data Statistik Desa
+    // Statistik data desa
     const [dataDesaStatistik] = await db.execute(`
       SELECT 
         jenis_data, jumlah_laki, jumlah_perempuan, 
@@ -318,7 +312,7 @@ exports.getBeranda = async (req, res) => {
       )
     `);
 
-    // Gabungkan semua data jadi 1 objek respons
+    // Kirim semua data dalam satu objek JSON
     res.json({
       statistik: {
         jumlah_berita: berita[0].total,

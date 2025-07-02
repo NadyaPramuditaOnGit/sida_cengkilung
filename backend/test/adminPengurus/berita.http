@@ -1,0 +1,87 @@
+###  GET konten list (Berita)
+GET http://localhost:3000/adminDanPengurus/konten?kategori=Berita&page=1&limit=5&search=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+###  GET konten list (Pengumuman)
+GET http://localhost:3000/adminDanPengurus/konten?kategori=Pengumuman&page=1&limit=5&search=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+###  GET konten by ID
+GET http://localhost:3000/adminDanPengurus/konten/13
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+###  POST buat konten baru (thumbnail optional)
+POST http://localhost:3000/adminDanPengurus/konten
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="judul"
+
+Kegiatan Sosialisasi dari Dinas Kebudayaan
+--boundary
+Content-Disposition: form-data; name="deskripsi"
+
+Deskripsi singkat kegiatan sosialisasi...
+--boundary
+Content-Disposition: form-data; name="konten"
+
+Isi konten lengkap dari kegiatan yang dilakukan...
+--boundary
+Content-Disposition: form-data; name="tanggal_publish"
+
+2025-07-01
+--boundary
+Content-Disposition: form-data; name="kategori"
+
+Pengumuman
+--boundary
+Content-Disposition: form-data; name="status"
+
+Published
+--boundary
+Content-Disposition: form-data; name="thumbnail"; filename="contoh.jpg"
+Content-Type: image/jpeg
+
+< ./contoh.jpg
+--boundary--
+
+###  PUT update konten
+PUT http://localhost:3000/adminDanPengurus/konten/13
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="judul"
+
+[UPDATE] Sosialisasi dari Dinas Kebudayaan
+--boundary
+Content-Disposition: form-data; name="deskripsi"
+
+Deskripsi baru setelah update...
+--boundary
+Content-Disposition: form-data; name="konten"
+
+Isi konten update-nya panjang di sini...
+--boundary
+Content-Disposition: form-data; name="tanggal_publish"
+
+2025-07-02
+--boundary
+Content-Disposition: form-data; name="kategori"
+
+Pengumuman
+--boundary
+Content-Disposition: form-data; name="status"
+
+Published
+--boundary
+Content-Disposition: form-data; name="thumbnail"; filename="update.jpg"
+Content-Type: image/jpeg
+
+< ./update.jpg
+--boundary--
+
+###  DELETE konten
+DELETE http://localhost:3000/adminDanPengurus/konten/12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc

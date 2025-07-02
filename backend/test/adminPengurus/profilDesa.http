@@ -1,0 +1,52 @@
+### 1. GET Deskripsi atau Video (bagian: Sejarah / VisiMisi / StrukturOrganisasi / GambaranUmum)
+GET http://localhost:3000/adminDanPengurus/profil-desa/Sejarah
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+###
+
+### 2. UPDATE Deskripsi atau Video
+PUT http://localhost:3000/adminDanPengurus/profil-desa/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: application/json
+
+{
+  "konten": "Ini adalah deskripsi baru tentang sejarah desa.",
+  "judul": "https://www.youtube.com/watch?v=dummy-url"
+}
+
+###
+
+### 3. UPLOAD FOTO (maks 15 file) - bagian bisa "GambaranUmum" misalnya
+POST http://localhost:3000/adminDanPengurus/profil-desa/GambaranUmum/upload-foto
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="foto"; filename="foto1.jpg"
+Content-Type: image/jpeg
+
+< ./foto1.jpg
+--boundary
+Content-Disposition: form-data; name="foto"; filename="foto2.png"
+Content-Type: image/png
+
+< ./foto2.png
+--boundary--
+
+###
+
+### 4. HAPUS FOTO PROFIL (ganti `nama-file.jpg` sesuai nama file asli)
+DELETE http://localhost:3000/adminDanPengurus/profil-desa/foto/nama-file.jpg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+###
+
+### 5. GET PERANGKAT DESA (dengan pagination)
+GET http://localhost:3000/adminDanPengurus/profil-desa/perangkat?page=1&limit=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+###
+
+### 6. GET Semua Data Profil Lainnya (misal: VisiMisi)
+GET http://localhost:3000/adminDanPengurus/profil-desa/VisiMisi
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc

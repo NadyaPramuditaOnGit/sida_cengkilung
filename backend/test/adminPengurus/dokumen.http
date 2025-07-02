@@ -1,0 +1,59 @@
+### Ambil daftar dokumen (dengan pagination)
+GET http://localhost:3000/adminDanPengurus/dokumen?page=1&limit=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NTI5ODMsImV4cCI6MTc1MTUzOTM4M30.xEoT6HaPjpJl_LFRSVsyRY-6bglwfSRpgs0JOGyoN1Q
+
+### Ambil detail dokumen berdasarkan ID
+GET http://localhost:3000/adminDanPengurus/dokumen/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRfcGVyYW4iOjIsIm5hbWEiOiJCdWRpIFBlcmFuZ2thdCIsInBlcmFuIjoiUGVyYW5na2F0X0Rlc2EiLCJpYXQiOjE3NTE0NTI2OTcsImV4cCI6MTc1MTUzOTA5N30.vpHLPy24bKbY3SNxZIkuor2Gz5L9jU9MPC4AEpUKDPI
+
+### Tambah dokumen baru (dengan file upload)
+POST http://localhost:3000/adminDanPengurus/dokumen
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRfcGVyYW4iOjIsIm5hbWEiOiJCdWRpIFBlcmFuZ2thdCIsInBlcmFuIjoiUGVyYW5na2F0X0Rlc2EiLCJpYXQiOjE3NTE0NTI2OTcsImV4cCI6MTc1MTUzOTA5N30.vpHLPy24bKbY3SNxZIkuor2Gz5L9jU9MPC4AEpUKDPI
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="judul"
+
+Contoh Dokumen Desa
+--boundary
+Content-Disposition: form-data; name="tanggal_dokumen"
+
+2024-07-02
+--boundary
+Content-Disposition: form-data; name="kategori"
+
+Surat
+--boundary
+Content-Disposition: form-data; name="file"; filename="contoh.pdf"
+Content-Type: application/pdf
+
+< ./contoh.pdf
+--boundary--
+
+### Update dokumen (opsional upload file baru)
+PUT http://localhost:3000/adminDanPengurus/dokumen/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRfcGVyYW4iOjIsIm5hbWEiOiJCdWRpIFBlcmFuZ2thdCIsInBlcmFuIjoiUGVyYW5na2F0X0Rlc2EiLCJpYXQiOjE3NTE0NTI2OTcsImV4cCI6MTc1MTUzOTA5N30.vpHLPy24bKbY3SNxZIkuor2Gz5L9jU9MPC4AEpUKDPI
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="judul"
+
+Update Dokumen Desa
+--boundary
+Content-Disposition: form-data; name="tanggal_dokumen"
+
+2024-07-03
+--boundary
+Content-Disposition: form-data; name="kategori"
+
+Laporan
+--boundary
+Content-Disposition: form-data; name="file"; filename="baru.docx"
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+< ./baru.docx
+--boundary--
+
+### Hapus dokumen
+DELETE http://localhost:3000/adminDanPengurus/dokumen/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRfcGVyYW4iOjIsIm5hbWEiOiJCdWRpIFBlcmFuZ2thdCIsInBlcmFuIjoiUGVyYW5na2F0X0Rlc2EiLCJpYXQiOjE3NTE0NTI2OTcsImV4cCI6MTc1MTUzOTA5N30.vpHLPy24bKbY3SNxZIkuor2Gz5L9jU9MPC4AEpUKDPI

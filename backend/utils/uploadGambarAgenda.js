@@ -1,11 +1,18 @@
-// utils/uploadAgenda.js
+// utils/uploadGambarAgenda.js
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
+// Buat folder ./uploads/agenda jika belum ada
+const folderPath = path.join(__dirname, '../uploads/agenda');
+if (!fs.existsSync(folderPath)) {
+  fs.mkdirSync(folderPath, { recursive: true });
+}
 
 // Konfigurasi penyimpanan file agenda
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads/agenda');
+    cb(null, folderPath);
   },
   filename: (req, file, cb) => {
     const uniqueName = `agenda_${Date.now()}${path.extname(file.originalname)}`;

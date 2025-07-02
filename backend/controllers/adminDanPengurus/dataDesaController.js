@@ -12,12 +12,21 @@ exports.getDataDesaByJenis = async (req, res) => {
       ORDER BY id_data ASC
     `, [jenis]);
 
-    res.json(rows);
+    // 👇 Hitung total agregat
+    const totalLaki = rows.reduce((sum, row) => sum + (row.jumlah_laki || 0), 0);
+    const totalPerempuan = rows.reduce((sum, row) => sum + (row.jumlah_perempuan || 0), 0);
+
+    res.json({
+      data: rows,
+      total_laki: totalLaki,
+      total_perempuan: totalPerempuan
+    });
   } catch (error) {
     console.error('[GET DATA DESA]', error);
     res.status(500).json({ error: 'Gagal mengambil data desa.' });
   }
 };
+
 
 // Tambah data desa
 exports.createDataDesa = async (req, res) => {

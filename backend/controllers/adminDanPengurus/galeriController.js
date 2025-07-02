@@ -6,12 +6,15 @@ const path = require('path');
 const validKategori = ['Keagamaan', 'Kesenian', 'Kegiatan'];
 const validJenisMedia = ['Foto', 'Video'];
 
-// GET /adminDanPengurus/galeri?jenis_media=Foto&page=1&search=xxx
+// ============================
+// GET /adminDanPengurus/galeri
+// ============================
+// dengan query: ?jenis_media=Foto&page=1&search=xxx
 exports.getGaleri = async (req, res) => {
-  const jenis_media = req.query.jenis_media || 'Foto'; // default Foto
+  const jenis_media = req.query.jenis_media || 'Foto';
   const search = req.query.search || '';
   const page = parseInt(req.query.page) || 1;
-  const limit = 3; // fix 3 per page
+  const limit = 3; // Sesuai tampilan frontend
   const offset = (page - 1) * limit;
 
   if (!validJenisMedia.includes(jenis_media)) {
@@ -19,6 +22,15 @@ exports.getGaleri = async (req, res) => {
   }
 
   try {
+    // Ambil total data untuk keperluan pagination frontend
+    const [countRows] = await db.execute(
+      `SELECT COUNT(*) AS total FROM galeri_desa WHERE jenis_media = ? AND (judul LIKE ? OR deskripsi LIKE ?)`,
+      [jenis_media, `%${search}%`, `%${search}%`]
+    );
+
+    const total = countRows[0].total;
+
+    // Ambil data galeri
     const query = `
       SELECT id_galeri, judul, deskripsi, tanggal_upload, kategori, jenis_media, lokasi_file, unggulan, tag, id_konten, diperbarui_pada
       FROM galeri_desa
@@ -29,14 +41,16 @@ exports.getGaleri = async (req, res) => {
 
     const [rows] = await db.execute(query, [jenis_media, `%${search}%`, `%${search}%`]);
 
-    res.json(rows);
+    res.json({ data: rows, total });
   } catch (err) {
     console.error('[GET GALERI]', err);
     res.status(500).json({ error: 'Gagal mengambil data galeri.' });
   }
 };
 
+// ============================
 // GET /adminDanPengurus/galeri/:id
+// ============================
 exports.getGaleriById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -49,8 +63,13 @@ exports.getGaleriById = async (req, res) => {
   }
 };
 
-// POST /adminDanPengurus/galeri (tambah galeri)
+// ============================
+// POST /adminDanPengurus/galeri
+// ============================
 exports.createGaleri = async (req, res) => {
+  console.log('DEBUG req.body:', req.body);
+  console.log('DEBUG req.files:', req.files);
+
   const { judul, deskripsi, tanggal_upload, kategori, jenis_media, unggulan, tag, id_konten } = req.body;
   const files = req.files;
 
@@ -74,7 +93,6 @@ exports.createGaleri = async (req, res) => {
     return res.status(400).json({ error: 'File media wajib diupload.' });
   }
 
-  // Parsing tag jika ada
   let parsedTag = null;
   if (tag) {
     try {
@@ -83,12 +101,11 @@ exports.createGaleri = async (req, res) => {
         return res.status(400).json({ error: 'Tag harus berupa array.' });
       }
     } catch (err) {
-      return res.status(400).json({ error: 'Format tag tidak valid. Gunakan array JSON, contoh: ["budaya", "adat"]' });
+      return res.status(400).json({ error: 'Format tag tidak valid.' });
     }
   }
 
   try {
-    // Validasi id_konten ada di DB
     const [kontenRows] = await db.execute('SELECT id_konten FROM konten WHERE id_konten = ?', [parseInt(id_konten)]);
     if (!kontenRows.length) {
       return res.status(400).json({ error: 'id_konten tidak ditemukan di tabel konten.' });
@@ -129,7 +146,9 @@ exports.createGaleri = async (req, res) => {
   }
 };
 
-// PUT /adminDanPengurus/galeri/:id (update galeri)
+// ============================
+// PUT /adminDanPengurus/galeri/:id
+// ============================
 exports.updateGaleri = async (req, res) => {
   const { id } = req.params;
   const { judul, deskripsi, tanggal_upload, kategori, jenis_media, unggulan, tag, id_konten } = req.body;
@@ -151,7 +170,6 @@ exports.updateGaleri = async (req, res) => {
     return res.status(400).json({ error: 'id_konten harus berupa angka lebih dari 0.' });
   }
 
-  // Parsing tag
   let parsedTag = null;
   if (tag) {
     try {
@@ -160,22 +178,19 @@ exports.updateGaleri = async (req, res) => {
         return res.status(400).json({ error: 'Tag harus berupa array.' });
       }
     } catch (err) {
-      return res.status(400).json({ error: 'Format tag tidak valid. Gunakan array JSON, contoh: ["budaya", "adat"]' });
+      return res.status(400).json({ error: 'Format tag tidak valid.' });
     }
   }
 
   try {
-    // Validasi id_konten ada di DB
     const [kontenRows] = await db.execute('SELECT id_konten FROM konten WHERE id_konten = ?', [parseInt(id_konten)]);
     if (!kontenRows.length) {
       return res.status(400).json({ error: 'id_konten tidak ditemukan di tabel konten.' });
     }
 
-    // Ambil data lama
     const [oldRows] = await db.execute('SELECT lokasi_file FROM galeri_desa WHERE id_galeri = ?', [id]);
     if (!oldRows.length) return res.status(404).json({ error: 'Galeri tidak ditemukan.' });
 
-    // Hapus file lama jika ada file baru
     if (files && files.length > 0) {
       const oldFilename = path.basename(oldRows[0].lokasi_file);
       const filePath = path.join('uploads/galeri', oldFilename);
@@ -216,11 +231,12 @@ exports.updateGaleri = async (req, res) => {
   }
 };
 
+// ============================
 // DELETE /adminDanPengurus/galeri/:id
+// ============================
 exports.deleteGaleri = async (req, res) => {
   const { id } = req.params;
   try {
-    // Ambil file dulu untuk hapus fisik
     const [rows] = await db.execute('SELECT lokasi_file FROM galeri_desa WHERE id_galeri = ?', [id]);
     if (!rows.length) return res.status(404).json({ error: 'Galeri tidak ditemukan.' });
 

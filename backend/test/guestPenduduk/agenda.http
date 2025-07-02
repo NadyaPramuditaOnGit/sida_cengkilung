@@ -1,0 +1,16 @@
+### Ambil semua tanggal agenda bulan Juni 2025
+GET http://localhost:3000/api/agenda/bulan?year=2025&month=7
+Content-Type: application/json
+
+###
+
+### Ambil detail agenda pada tanggal tertentu
+GET http://localhost:3000/api/agenda/tanggal?date=2025-06-18
+Content-Type: application/json
+
+###
+
+### Ambil agenda tanggal tertentu sebagai pengguna login
+GET http://localhost:3000/api/agenda/tanggal?date=2025-06-18
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRfcGVyYW4iOjMsIm5hbWEiOiJBeXUgV2FyZ2EiLCJwZXJhbiI6IlBlbmR1ZHVrIiwiaWF0IjoxNzUxNDU2ODc1LCJleHAiOjE3NTE1NDMyNzV9.0sWCV4-U-66E1oWLPyT3nENO8b2Ua5AIlgqmSYilWiU

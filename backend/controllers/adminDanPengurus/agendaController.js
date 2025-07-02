@@ -3,49 +3,30 @@ const path = require('path');
 const moment = require('moment');
 moment.locale('id');
 
-
-// Ambil daftar agenda dengan pagination dan optional filter bulan
-// exports.getAgendaList = async (req, res) => {
-//   const { bulan = new Date().getMonth() + 1, tahun = new Date().getFullYear(), page = 1, limit = 5 } = req.query;
-//   const offset = (parseInt(page) - 1) * parseInt(limit);
-
-//   try {
-//     const [rows] = await db.execute(`
-//       SELECT id_agenda, judul_kegiatan, lokasi, deskripsi, tanggal, waktu, jenis_kegiatan, gambar
-//       FROM agenda_desa
-//       WHERE MONTH(tanggal) = ? AND YEAR(tanggal) = ?
-//       ORDER BY tanggal DESC
-//       LIMIT ? OFFSET ?
-//     `, [bulan, tahun, parseInt(limit), offset]);
-
-//     res.json(rows);
-//   } catch (error) {
-//     console.error('[GET AGENDA LIST]', error);
-//     res.status(500).json({ error: 'Gagal mengambil daftar agenda.' });
-//   }
-// };
-
+//  Ambil daftar agenda dengan pagination, filter bulan & tahun
 exports.getAgendaList = async (req, res) => {
   const { bulan = new Date().getMonth() + 1, tahun = new Date().getFullYear(), page = 1, limit = 5 } = req.query;
   const limitInt = parseInt(limit);
   const offset = (parseInt(page) - 1) * limitInt;
 
   try {
-    const query = `
+    // Total data untuk pagination (opsional, bisa dipakai frontend)
+    const [[{ total }]] = await db.execute(`
+      SELECT COUNT(*) AS total FROM agenda_desa
+      WHERE MONTH(tanggal) = ? AND YEAR(tanggal) = ?
+    `, [bulan, tahun]);
+
+    const [rows] = await db.execute(`
       SELECT id_agenda, judul_kegiatan, lokasi, deskripsi, tanggal, waktu, jenis_kegiatan, gambar
       FROM agenda_desa
       WHERE MONTH(tanggal) = ? AND YEAR(tanggal) = ?
       ORDER BY tanggal DESC
       LIMIT ${limitInt} OFFSET ${offset}
-    `;
-
-    const [rows] = await db.execute(query, [bulan, tahun]);
+    `, [bulan, tahun]);
 
     const hasil = rows.map(item => {
-      const deskripsi = item.deskripsi?.trim() || '';
+      const deskripsi = (item.deskripsi || '').replace(/\n/g, ' ').trim(); // 🧼 hapus newline
       const kalimat = deskripsi.split('. ').slice(0, 5).join('. ').trim();
-
-      // Pastikan tidak double titik di akhir
       const deskripsi_singkat = kalimat.endsWith('.') ? kalimat + '...' : kalimat + '...';
 
       return {
@@ -55,17 +36,19 @@ exports.getAgendaList = async (req, res) => {
       };
     });
 
-    res.json(hasil);
+    res.json({
+      data: hasil,
+      total,
+      page: parseInt(page),
+      limit: limitInt
+    });
   } catch (error) {
     console.error('[ADMIN AGENDA LIST]', error);
     res.status(500).json({ error: 'Gagal mengambil daftar agenda admin.' });
   }
 };
 
-
-  
-
-// Ambil semua tanggal yang memiliki agenda (untuk ditandai di kalender)
+//  Ambil semua tanggal agenda untuk ditampilkan di kalender (tandai)
 exports.getKalenderAgenda = async (req, res) => {
   try {
     const [rows] = await db.execute(`
@@ -81,7 +64,7 @@ exports.getKalenderAgenda = async (req, res) => {
   }
 };
 
-// Ambil agenda berdasarkan ID
+//  Ambil detail agenda by ID
 exports.getAgendaById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -94,13 +77,13 @@ exports.getAgendaById = async (req, res) => {
   }
 };
 
-// Tambah agenda
+//  Tambah agenda baru
 exports.createAgenda = async (req, res) => {
   const { judul_kegiatan, tanggal, waktu, lokasi, deskripsi, jenis_kegiatan, id_konten } = req.body;
   const gambar = req.file ? `/uploads/agenda/${req.file.filename}` : null;
   const dibuat_oleh = req.user.id;
   const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
- 
+
   if (req.file && !allowedExtensions.includes(path.extname(req.file.originalname).toLowerCase())) {
     return res.status(400).json({ error: 'Format file tidak diperbolehkan.' });
   }
@@ -123,7 +106,7 @@ exports.createAgenda = async (req, res) => {
   }
 };
 
-// Update agenda
+//  Update agenda by ID
 exports.updateAgenda = async (req, res) => {
   const { id } = req.params;
   const { judul_kegiatan, tanggal, waktu, lokasi, deskripsi, jenis_kegiatan, id_konten } = req.body;
@@ -148,7 +131,7 @@ exports.updateAgenda = async (req, res) => {
   }
 };
 
-// Hapus agenda
+//  Hapus agenda by ID
 exports.deleteAgenda = async (req, res) => {
   const { id } = req.params;
   try {

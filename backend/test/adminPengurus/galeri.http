@@ -1,0 +1,154 @@
+### 1. Get Galeri Video (halaman 1, tanpa search)
+GET http://localhost:3000/adminDanPengurus/galeri?jenis_media=Video&page=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+
+### 2. Get Galeri Foto (halaman 2, dengan search "upacara")
+GET http://localhost:3000/adminDanPengurus/galeri?jenis_media=Foto&page=2&search=upacara
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+
+### 3. Get Detail Galeri by ID
+GET http://localhost:3000/adminDanPengurus/galeri/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+
+
+### 4. Upload Galeri Foto
+POST http://localhost:3000/adminDanPengurus/galeri
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="judul"
+
+Upacara Melasti
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="deskripsi"
+
+Prosesi sakral sebelum Nyepi.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="tanggal_upload"
+
+2025-07-01
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="kategori"
+
+Keagamaan
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="jenis_media"
+
+Foto
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="unggulan"
+
+true
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="id_konten"
+
+6
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="tag"
+
+["melasti","adat"]
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="thumb.png"
+Content-Type: image/png
+
+< ./test/thumb.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### 5. Upload Galeri Video (BENAR)
+POST http://localhost:3000/adminDanPengurus/galeri
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="judul"
+
+Video Tari Bali
+--boundary
+Content-Disposition: form-data; name="deskripsi"
+
+Pertunjukan tari di pura desa.
+--boundary
+Content-Disposition: form-data; name="tanggal_upload"
+
+2025-07-01
+--boundary
+Content-Disposition: form-data; name="kategori"
+
+Kesenian
+--boundary
+Content-Disposition: form-data; name="jenis_media"
+
+Video
+--boundary
+Content-Disposition: form-data; name="id_konten"
+
+6
+--boundary
+Content-Disposition: form-data; name="tag"
+
+["tari", "budaya"]
+--boundary
+Content-Disposition: form-data; name="unggulan"
+
+true
+--boundary
+Content-Disposition: form-data; name="files"; filename="tari.mp4"
+Content-Type: video/mp4
+
+< ./uploads_mock/tari.mp4
+--boundary--
+
+
+
+### 6. Update Galeri (dengan ganti file dan data baru)
+PUT http://localhost:3000/adminDanPengurus/galeri/14
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="judul"
+
+Tari Kecak Update
+--boundary
+Content-Disposition: form-data; name="deskripsi"
+
+Update deskripsi.
+--boundary
+Content-Disposition: form-data; name="tanggal_upload"
+
+2025-07-01
+--boundary
+Content-Disposition: form-data; name="kategori"
+
+Kesenian
+--boundary
+Content-Disposition: form-data; name="jenis_media"
+
+Video
+--boundary
+Content-Disposition: form-data; name="id_konten"
+
+6
+--boundary
+Content-Disposition: form-data; name="tag"
+
+["update", "kecak"]
+--boundary
+Content-Disposition: form-data; name="unggulan"
+
+false
+--boundary
+Content-Disposition: form-data; name="files"; filename="kecak_baru.mp4"
+Content-Type: video/mp4
+
+< ./uploads_mock/kecak_baru.mp4
+--boundary--
+
+
+### 7. Delete Galeri
+DELETE http://localhost:3000/adminDanPengurus/galeri/14
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc

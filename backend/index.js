@@ -30,7 +30,7 @@ app.use('/uploads/profil', express.static(path.join(__dirname, 'uploads/profil')
 // ==================== ROUTES: AUTH ====================
 app.use('/api/auth', require('./routes/authRoutes'));
 
-// ==================== ROUTES: GUEST & PENGGUNA ====================
+// ==================== ROUTES: GUEST & PENDUDUK ====================
 const guestPendudukRoutes = require('./routes/guestPendudukRoutes');
 const beritaRoutes = require('./routes/guestPenduduk/beritaRoutes');
 const sejarahRoutes = require('./routes/guestPenduduk/sejarahRoutes');
@@ -38,6 +38,7 @@ const profilDesaRoutes = require('./routes/guestPenduduk/profilDesaRoutes');
 const galeriDesaRoutes = require('./routes/guestPenduduk/galeriDesaRoutes');
 const detailRoutes = require('./routes/guestPenduduk/detailRoutes');
 const dataDesaRoutes = require('./routes/guestPenduduk/dataDesaRoutes');
+const agendaRoutes = require('./routes/guestPenduduk/agendaRoutes');
 
 app.use('/api', guestPendudukRoutes);
 app.use('/api/berita', beritaRoutes);
@@ -46,6 +47,7 @@ app.use('/api', profilDesaRoutes);
 app.use('/api', galeriDesaRoutes);
 app.use('/api', detailRoutes);
 app.use('/api', dataDesaRoutes);
+app.use('/api/agenda', agendaRoutes);
 
 // ==================== ROUTES: PENGGUNA (WARGA) ====================
 const arsipRoutes = require('./routes/penduduk/arsipRoutes');
@@ -58,7 +60,7 @@ app.use('/admin/pengguna', require('./routes/admin/penggunaRoutes'));
 app.use('/adminDanPengurus/konten', require('./routes/adminDanPengurus/kontenRoutes'));
 app.use('/adminDanPengurus/galeri', require('./routes/adminDanPengurus/galeriRoutes'));
 app.use('/adminDanPengurus/agenda', require('./routes/adminDanPengurus/agendaRoutes'));
-app.use('/adminDanPengurus/beranda', require('./routes/adminDanPengurus/berandaRoutes')); // ✅ Tambahan route beranda
+app.use('/adminDanPengurus/beranda', require('./routes/adminDanPengurus/berandaRoutes'));
 app.use('/adminDanPengurus/data-desa', require('./routes/adminDanPengurus/dataDesaRoutes'));
 app.use('/adminDanPengurus/dokumen', require('./routes/adminDanPengurus/dokumenRoutes'));
 app.use('/adminDanPengurus/profil-desa', require('./routes/adminDanPengurus/profilDesaRoutes'));
