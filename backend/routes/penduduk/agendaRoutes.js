@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const agendaController = require('../../controllers/guestPenduduk/agendaController');
+const agendaController = require('../../controllers/penduduk/agendaController');
 const { verifyTokenOptional } = require('../../middleware/authMiddleware');
 
 // GET /api/agenda/bulan?year=2025&month=6
