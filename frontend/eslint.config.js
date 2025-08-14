@@ -9,7 +9,14 @@ export default [
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node, // Add Node.js globals
+        process: 'readonly', // Explicitly allow process
+        import: 'readonly', // Allow import statements
+        import:meta, 'readonly' // Allow import.meta
+      : true,
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
@@ -29,5 +36,10 @@ export default [
         { allowConstantExport: true },
       ],
     },
+    settings: {
+      react: {
+        version: 'detect' // Automatically detect React version
+      }
+    }
   },
 ]

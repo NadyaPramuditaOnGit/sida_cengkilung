@@ -1,9 +1,9 @@
 ### 1. Ambil semua data berdasarkan jenis_data
-GET http://localhost:3000/adminDanPengurus/data-desa?jenis=Kependudukan
+GET http://localhost:3001/adminDanPengurus/data-desa?jenis=Kependudukan
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
 
 ### 2. Tambah data desa (jenis = Kependudukan)
-POST http://localhost:3000/adminDanPengurus/data-desa
+POST http://localhost:3001/adminDanPengurus/data-desa
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
 Content-Type: application/json
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### 3. Tambah data desa lainnya (jenis = Kependudukan)
-POST http://localhost:3000/adminDanPengurus/data-desa
+POST http://localhost:3001/adminDanPengurus/data-desa
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
 Content-Type: application/json
 
@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ### 4. Ubah data desa (misal ID = 1)
-PUT http://localhost:3000/adminDanPengurus/data-desa/4
+PUT http://localhost:3001/adminDanPengurus/data-desa/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
 Content-Type: application/json
 
@@ -41,6 +41,6 @@ Content-Type: application/json
 }
 
 ### 5. Hapus data desa (misal ID = 2)
-DELETE http://localhost:3000/adminDanPengurus/data-desa/2
+DELETE http://localhost:3001/adminDanPengurus/data-desa/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWRfcGVyYW4iOjEsIm5hbWEiOiJDaXRyYSBBZG1pbiIsInBlcmFuIjoiQWRtaW4iLCJpYXQiOjE3NTE0NDY1MjQsImV4cCI6MTc1MTUzMjkyNH0.SsIM6FtQ9qHTUr5A5gOQpNMEef5UPbdOZt78_fnPeVc
 

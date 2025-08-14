@@ -20,4 +20,9 @@ export default defineConfig({
     }
     })
   ],
+  define: {
+    'process.env': {
+      REACT_APP_API_BASE_URL: JSON.stringify(process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api')
+    }
+  },
 })

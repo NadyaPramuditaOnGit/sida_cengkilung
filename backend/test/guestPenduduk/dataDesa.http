@@ -1,82 +1,92 @@
-@baseUrl = http://localhost:3000/api
-@token = Bearer <token_opsional_kalau_login>
+@baseUrl = http://localhost:3001
+@token = Bearer <token_opsional>
 
 ### GET Data Kependudukan
-GET {{baseUrl}}/data-desa?jenis=Kependudukan
+GET {{baseUrl}}/api/data-desa?jenis=Kependudukan
 Authorization: {{token}}
 
 ### GET Total Kependudukan
-GET {{baseUrl}}/data-desa/total?jenis=Kependudukan
+GET {{baseUrl}}/api/data-desa/total?jenis=Kependudukan
 Authorization: {{token}}
 
 ### GET Data Agama
-GET {{baseUrl}}/data-desa?jenis=Agama
+GET {{baseUrl}}/api/data-desa?jenis=Agama
 Authorization: {{token}}
 
 ### GET Total Agama
-GET {{baseUrl}}/data-desa/total?jenis=Agama
+GET {{baseUrl}}/api/data-desa/total?jenis=Agama
 Authorization: {{token}}
 
 ### GET Data Pekerjaan
-GET {{baseUrl}}/data-desa?jenis=Pekerjaan
+GET {{baseUrl}}/api/data-desa?jenis=Pekerjaan
 Authorization: {{token}}
 
 ### GET Total Pekerjaan
-GET {{baseUrl}}/data-desa/total?jenis=Pekerjaan
+GET {{baseUrl}}/api/data-desa/total?jenis=Pekerjaan
 Authorization: {{token}}
 
 ###  GET Data Pendidikan
-GET {{baseUrl}}/data-desa?jenis=Pendidikan
+GET {{baseUrl}}/api/data-desa?jenis=Pendidikan
 Authorization: {{token}}
 
 ###  GET Total Pendidikan
-GET {{baseUrl}}/data-desa/total?jenis=Pendidikan
+GET {{baseUrl}}/api/data-desa/total?jenis=Pendidikan
 Authorization: {{token}}
 
 ###  GET Data Usia
-GET {{baseUrl}}/data-desa?jenis=Usia
+GET {{baseUrl}}/api/data-desa?jenis=Usia
 Authorization: {{token}}
 
 ###  GET Total Usia
-GET {{baseUrl}}/data-desa/total?jenis=Usia
+GET {{baseUrl}}/api/data-desa/total?jenis=Usia
 Authorization: {{token}}
 
 
 ### GET Data Kependudukan
-GET {{baseUrl}}/data-desa?jenis=Kependudukan
+GET {{baseUrl}}/api/data-desa?jenis=Kependudukan
 
 
 ### GET Total Kependudukan
-GET {{baseUrl}}/data-desa/total?jenis=Kependudukan
+GET {{baseUrl}}/api/data-desa/total?jenis=Kependudukan
 
 
 ### GET Data Agama
-GET {{baseUrl}}/data-desa?jenis=Agama
+GET {{baseUrl}}/api/data-desa?jenis=Agama
 
 
 ### GET Total Agama
-GET {{baseUrl}}/data-desa/total?jenis=Agama
+GET {{baseUrl}}/api/data-desa/total?jenis=Agama
 
 
 ### GET Data Pekerjaan
-GET {{baseUrl}}/data-desa?jenis=Pekerjaan
+GET {{baseUrl}}/api/data-desa?jenis=Pekerjaan
 
 
 ### GET Total Pekerjaan
-GET {{baseUrl}}/data-desa/total?jenis=Pekerjaan
+GET {{baseUrl}}/api/data-desa/total?jenis=Pekerjaan
 
 
 ###  GET Data Pendidikan
-GET {{baseUrl}}/data-desa?jenis=Pendidikan
+GET {{baseUrl}}/api/data-desa?jenis=Pendidikan
 
 
 ###  GET Total Pendidikan
-GET {{baseUrl}}/data-desa/total?jenis=Pendidikan
+GET {{baseUrl}}/api/data-desa/total?jenis=Pendidikan
 
 
 ###  GET Data Usia
-GET {{baseUrl}}/data-desa?jenis=Usia
+GET {{baseUrl}}/api/data-desa?jenis=Usia
 
 
 ###  GET Total Usia
-GET {{baseUrl}}/data-desa/total?jenis=Usia
+GET {{baseUrl}}/api/data-desa/total?jenis=Usia
+
+### GET Data by Jenis
+GET {{baseUrl}}/api/data-desa?jenis=Kependudukan&tahun=2025
+Authorization: {{token}}
+
+### WebSocket Status
+GET {{baseUrl}}/ws-status
+
+### Health Check
+GET {{baseUrl}}/health

@@ -1,11 +1,22 @@
 import React from 'react'
-import LisAgenda from './pages/ListAgenda'
+import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom'
+import GNavbar from './components/Navbar/GNavbar.jsx'
+import ADataDesa from './components/Table/ADataDesa.jsx'
+import Footer from './components/Other/Footer.jsx'
+
 
 function App() {
   return (
+    <BrowserRouter>
     <div>
-      <LisAgenda/>
+      <GNavbar/>
+      <div>
+        <ADataDesa/>
+      </div>
     </div>
+    <Footer/>
+
+    </BrowserRouter>
   )
 }
 

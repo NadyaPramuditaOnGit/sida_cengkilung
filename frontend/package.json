@@ -2,6 +2,7 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost:3001",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,11 +11,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@remixicon/react": "^4.6.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/vite": "^4.1.8",
     "@types/file-saver": "^2.0.7",
+    "antd": "^5.26.4",
     "axios": "^1.10.0",
+    "eventsource": "^4.0.0",
     "file-saver": "^2.0.5",
     "file-viewer": "^1.2.0",
     "framer-motion": "^12.18.1",

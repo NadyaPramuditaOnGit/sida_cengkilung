@@ -325,3 +325,23 @@
 .hero-image {
   transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.highlight-update {
+  animation: highlight 2s ease-out;
+}
+
+@keyframes highlight {
+  0% { background-color: rgba(74, 222, 128, 0.5); }
+  100% { background-color: transparent; }
+}
+
+tr {
+  transition: background-color 0.3s ease;
+}
+
+.your-element {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}

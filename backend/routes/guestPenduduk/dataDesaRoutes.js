@@ -1,18 +1,31 @@
+// routes/guestPenduduk/dataDesaRoutes.js
 const express = require('express');
 const router = express.Router();
 const dataDesaController = require('../../controllers/guestPenduduk/dataDesaController');
-const { verifyTokenOptional } = require('../../middleware/authMiddleware');
+const SSEService = require('../../services/sse');
 
-/**
- * Route untuk ambil data desa berdasarkan jenis_data
- * Bisa diakses Guest maupun Warga (login optional)
- */
-router.get('/data-desa', verifyTokenOptional, dataDesaController.getDataDesaByJenis);
+// Endpoint API biasa
+router.get('/', dataDesaController.getDataDesaByJenis);
+router.get('/total', dataDesaController.getTotalDataDesaByJenis);
 
-/**
- * Route untuk ambil total summary data desa per jenis_data
- * Bisa diakses Guest maupun Warga (login optional)
- */
-router.get('/data-desa/total', verifyTokenOptional, dataDesaController.getTotalDataDesaByJenis);
+// Endpoint SSE untuk real-time Data Desa
+router.get('/stream', (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders();
+
+  SSEService.addClient('data-desa', res);
+
+  // Kirim heartbeat tiap 25 detik
+  const heartbeat = setInterval(() => {
+    res.write('event: heartbeat\ndata: {}\n\n');
+  }, 25000);
+
+  req.on('close', () => {
+    clearInterval(heartbeat);
+    SSEService.removeClient('data-desa', res);
+  });
+});
 
 module.exports = router;

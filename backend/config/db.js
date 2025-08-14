@@ -1,11 +1,15 @@
+// config/db.js
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
-const db = mysql.createPool({
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  socketPath: '/tmp/mysql.sock'
-});
+const dbConfig = {
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'desa_adat_cengkilung_db',
+  port: parseInt(process.env.DB_PORT) || 3307
+};
 
-module.exports = db;
+const pool = mysql.createPool(dbConfig);
+
+module.exports = {pool};

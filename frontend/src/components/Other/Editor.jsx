@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import Toolbar from './ToolBar'
-import Button from './Button/Button'
+import Button from '../Button/Button'
 import { RiSaveLine, RiDeleteBinLine } from '@remixicon/react'
 
 export default function Editor({ initialContent = '', onSave }) {
